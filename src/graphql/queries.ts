@@ -29,14 +29,17 @@ export const GET_PLACES = gql`
   query getPlaces($first: Int) {
     places(first: $first) {
       id
-      name
       slug
+      visible
       visited
-      location {
+      name
+      resume
+      tags
+      cordinates {
         longitude
         latitude
       }
-      description {
+      aboutText {
         html
         text
       }
@@ -53,14 +56,17 @@ export const GET_PLACE_BY_SLUG = gql`
   query getPlaceBySlug($slug: String!) {
     place(where: { slug: $slug }) {
       id
-      name
       slug
+      visible
       visited
-      location {
+      name
+      resume
+      tags
+      cordinates {
         longitude
         latitude
       }
-      description {
+      aboutText {
         html
         text
       }

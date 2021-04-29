@@ -9,7 +9,14 @@ type Place = {
   name: string
   slug: string
   visited: boolean
-  location: {
+  visible: boolean
+  resume?: string
+  aboutText?: {
+    html: string
+    text: string
+  }
+  tags?: [string]
+  cordinates: {
     longitude: number
     latitude: number
   }
@@ -72,8 +79,8 @@ const Map = ({ places }: MapProps) => {
           }}
         </MapConsumer>
 
-        {places?.map(({ slug, name, location }) => {
-          const { latitude, longitude } = location
+        {places?.map(({ slug, name, cordinates }) => {
+          const { latitude, longitude } = cordinates
 
           return (
             <Marker

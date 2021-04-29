@@ -7,10 +7,12 @@ describe('<Map />', () => {
       id: '1',
       name: 'Quilo',
       slug: 'quilo',
-      location: {
+      cordinates: {
         longitude: -15,
         latitude: 10,
       },
+      visited: true,
+      visible: true,
     }
     render(<Map places={[place]} />)
 

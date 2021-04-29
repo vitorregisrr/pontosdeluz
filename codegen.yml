@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://api-ca-central-1.graphcms.com/v2/ckndk6mqvw1yi01xxbpvvcma3/master"
+schema: "https://api-ca-central-1.graphcms.com/v2/cko2a20k7ngib01xtg8fc800t/master"
 documents: "src/graphql/queries.ts"
 generates:
   src/graphql/generated/graphql.ts:

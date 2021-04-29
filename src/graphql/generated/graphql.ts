@@ -1292,9 +1292,9 @@ export type Page = Node & {
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
   publishedBy?: Maybe<User>;
-  heading?: Maybe<Scalars['String']>;
-  slug: Scalars['String'];
-  body: RichText;
+  heading: Scalars['String'];
+  slug?: Maybe<Scalars['String']>;
+  body?: Maybe<RichText>;
   /** List of Page versions */
   history: Array<Version>;
 };
@@ -1348,9 +1348,9 @@ export type PageConnection = {
 export type PageCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  heading?: Maybe<Scalars['String']>;
-  slug: Scalars['String'];
-  body: Scalars['RichTextAST'];
+  heading: Scalars['String'];
+  slug?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['RichTextAST']>;
 };
 
 export type PageCreateManyInlineInput = {
@@ -1739,10 +1739,13 @@ export type Place = Node & {
   publishedBy?: Maybe<User>;
   name: Scalars['String'];
   slug: Scalars['String'];
-  location: Location;
+  cordinates?: Maybe<Location>;
+  resume?: Maybe<Scalars['String']>;
+  tags: Array<Tag>;
+  aboutText?: Maybe<RichText>;
   gallery: Array<Asset>;
-  description?: Maybe<RichText>;
-  visited?: Maybe<Scalars['Boolean']>;
+  visible: Scalars['Boolean'];
+  visited: Scalars['Boolean'];
   /** List of Place versions */
   history: Array<Version>;
 };
@@ -1810,10 +1813,13 @@ export type PlaceCreateInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   slug: Scalars['String'];
-  location: LocationInput;
+  cordinates?: Maybe<LocationInput>;
+  resume?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Tag>>;
+  aboutText?: Maybe<Scalars['RichTextAST']>;
   gallery?: Maybe<AssetCreateManyInlineInput>;
-  description?: Maybe<Scalars['RichTextAST']>;
-  visited?: Maybe<Scalars['Boolean']>;
+  visible: Scalars['Boolean'];
+  visited: Scalars['Boolean'];
 };
 
 export type PlaceCreateManyInlineInput = {
@@ -1954,9 +1960,41 @@ export type PlaceManyWhereInput = {
   slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   slug_not_ends_with?: Maybe<Scalars['String']>;
+  resume?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  resume_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  resume_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  resume_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  resume_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  resume_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  resume_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  resume_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  resume_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  resume_not_ends_with?: Maybe<Scalars['String']>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  tags?: Maybe<Array<Tag>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  tags_not?: Maybe<Array<Tag>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  tags_contains_all?: Maybe<Array<Tag>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  tags_contains_some?: Maybe<Array<Tag>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  tags_contains_none?: Maybe<Array<Tag>>;
   gallery_every?: Maybe<AssetWhereInput>;
   gallery_some?: Maybe<AssetWhereInput>;
   gallery_none?: Maybe<AssetWhereInput>;
+  visible?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  visible_not?: Maybe<Scalars['Boolean']>;
   visited?: Maybe<Scalars['Boolean']>;
   /** All values that are not equal to given value. */
   visited_not?: Maybe<Scalars['Boolean']>;
@@ -1975,6 +2013,12 @@ export enum PlaceOrderByInput {
   NameDesc = 'name_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
+  ResumeAsc = 'resume_ASC',
+  ResumeDesc = 'resume_DESC',
+  TagsAsc = 'tags_ASC',
+  TagsDesc = 'tags_DESC',
+  VisibleAsc = 'visible_ASC',
+  VisibleDesc = 'visible_DESC',
   VisitedAsc = 'visited_ASC',
   VisitedDesc = 'visited_DESC'
 }
@@ -1982,9 +2026,12 @@ export enum PlaceOrderByInput {
 export type PlaceUpdateInput = {
   name?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
-  location?: Maybe<LocationInput>;
+  cordinates?: Maybe<LocationInput>;
+  resume?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Tag>>;
+  aboutText?: Maybe<Scalars['RichTextAST']>;
   gallery?: Maybe<AssetUpdateManyInlineInput>;
-  description?: Maybe<Scalars['RichTextAST']>;
+  visible?: Maybe<Scalars['Boolean']>;
   visited?: Maybe<Scalars['Boolean']>;
 };
 
@@ -2006,8 +2053,11 @@ export type PlaceUpdateManyInlineInput = {
 };
 
 export type PlaceUpdateManyInput = {
-  name?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['RichTextAST']>;
+  cordinates?: Maybe<LocationInput>;
+  resume?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Tag>>;
+  aboutText?: Maybe<Scalars['RichTextAST']>;
+  visible?: Maybe<Scalars['Boolean']>;
   visited?: Maybe<Scalars['Boolean']>;
 };
 
@@ -2169,9 +2219,41 @@ export type PlaceWhereInput = {
   slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   slug_not_ends_with?: Maybe<Scalars['String']>;
+  resume?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  resume_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  resume_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  resume_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  resume_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  resume_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  resume_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  resume_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  resume_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  resume_not_ends_with?: Maybe<Scalars['String']>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  tags?: Maybe<Array<Tag>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  tags_not?: Maybe<Array<Tag>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  tags_contains_all?: Maybe<Array<Tag>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  tags_contains_some?: Maybe<Array<Tag>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  tags_contains_none?: Maybe<Array<Tag>>;
   gallery_every?: Maybe<AssetWhereInput>;
   gallery_some?: Maybe<AssetWhereInput>;
   gallery_none?: Maybe<AssetWhereInput>;
+  visible?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  visible_not?: Maybe<Scalars['Boolean']>;
   visited?: Maybe<Scalars['Boolean']>;
   /** All values that are not equal to given value. */
   visited_not?: Maybe<Scalars['Boolean']>;
@@ -2180,6 +2262,7 @@ export type PlaceWhereInput = {
 /** References Place record uniquely */
 export type PlaceWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
 };
 
@@ -2427,6 +2510,13 @@ export enum SystemDateTimeFieldVariation {
   Combined = 'COMBINED'
 }
 
+export enum Tag {
+  Hospedagem = 'hospedagem',
+  Meditacao = 'meditacao',
+  Natureza = 'natureza',
+  Xamanismo = 'xamanismo'
+}
+
 export type UnpublishLocaleInput = {
   /** Locales to unpublish */
   locale: Locale;
@@ -2455,6 +2545,8 @@ export type User = Node & {
   picture?: Maybe<Scalars['String']>;
   /** User Kind. Can be either MEMBER, PAT or PUBLIC */
   kind: UserKind;
+  /** Flag to determine if user is active or not */
+  isActive: Scalars['Boolean'];
 };
 
 
@@ -2611,6 +2703,9 @@ export type UserManyWhereInput = {
   kind_in?: Maybe<Array<UserKind>>;
   /** All values that are not contained in given list. */
   kind_not_in?: Maybe<Array<UserKind>>;
+  isActive?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  isActive_not?: Maybe<Scalars['Boolean']>;
 };
 
 export enum UserOrderByInput {
@@ -2627,7 +2722,9 @@ export enum UserOrderByInput {
   PictureAsc = 'picture_ASC',
   PictureDesc = 'picture_DESC',
   KindAsc = 'kind_ASC',
-  KindDesc = 'kind_DESC'
+  KindDesc = 'kind_DESC',
+  IsActiveAsc = 'isActive_ASC',
+  IsActiveDesc = 'isActive_DESC'
 }
 
 /** Identifies documents */
@@ -2749,6 +2846,9 @@ export type UserWhereInput = {
   kind_in?: Maybe<Array<UserKind>>;
   /** All values that are not contained in given list. */
   kind_not_in?: Maybe<Array<UserKind>>;
+  isActive?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  isActive_not?: Maybe<Scalars['Boolean']>;
 };
 
 /** References User record uniquely */
@@ -2857,10 +2957,10 @@ export type GetPagesQuery = (
   & { pages: Array<(
     { __typename?: 'Page' }
     & Pick<Page, 'id' | 'heading' | 'slug'>
-    & { body: (
+    & { body?: Maybe<(
       { __typename?: 'RichText' }
       & Pick<RichText, 'html'>
-    ) }
+    )> }
   )> }
 );
 
@@ -2874,10 +2974,10 @@ export type GetPageBySlugQuery = (
   & { page?: Maybe<(
     { __typename?: 'Page' }
     & Pick<Page, 'id' | 'slug' | 'heading'>
-    & { body: (
+    & { body?: Maybe<(
       { __typename?: 'RichText' }
       & Pick<RichText, 'html'>
-    ) }
+    )> }
   )> }
 );
 
@@ -2890,11 +2990,11 @@ export type GetPlacesQuery = (
   { __typename?: 'Query' }
   & { places: Array<(
     { __typename?: 'Place' }
-    & Pick<Place, 'id' | 'name' | 'slug' | 'visited'>
-    & { location: (
+    & Pick<Place, 'id' | 'slug' | 'visible' | 'visited' | 'name' | 'resume' | 'tags'>
+    & { cordinates?: Maybe<(
       { __typename?: 'Location' }
       & Pick<Location, 'longitude' | 'latitude'>
-    ), description?: Maybe<(
+    )>, aboutText?: Maybe<(
       { __typename?: 'RichText' }
       & Pick<RichText, 'html' | 'text'>
     )>, gallery: Array<(
@@ -2913,11 +3013,11 @@ export type GetPlaceBySlugQuery = (
   { __typename?: 'Query' }
   & { place?: Maybe<(
     { __typename?: 'Place' }
-    & Pick<Place, 'id' | 'name' | 'slug' | 'visited'>
-    & { location: (
+    & Pick<Place, 'id' | 'slug' | 'visible' | 'visited' | 'name' | 'resume' | 'tags'>
+    & { cordinates?: Maybe<(
       { __typename?: 'Location' }
       & Pick<Location, 'longitude' | 'latitude'>
-    ), description?: Maybe<(
+    )>, aboutText?: Maybe<(
       { __typename?: 'RichText' }
       & Pick<RichText, 'html' | 'text'>
     )>, gallery: Array<(
