@@ -11,8 +11,8 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href="/img/icon-512.png" />
-        <link rel="apple-touch-icon" href="/img/icon-512.png" />
+        <link rel="shortcut icon" href="/img/light-orb.png" />
+        <link rel="apple-touch-icon" href="/img/light-orb.png" />
         <link rel="manifest" href="/manifest.json" />
         <link
           rel="stylesheet"
@@ -28,7 +28,7 @@ function App({ Component, pageProps }: AppProps) {
       <DefaultSeo {...SEO} />
       <GlobalStyles />
       <NextNprogress
-        color="#0ff1e6"
+        color="#f5e042"
         startPosition={0.3}
         stopDelayMs={200}
         height={3}

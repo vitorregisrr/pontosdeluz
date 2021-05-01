@@ -1,8 +1,14 @@
-import { useRouter } from 'next/dist/client/router'
+import { useState } from 'react'
+import L from 'leaflet'
 import { MapContainer, TileLayer, Marker, MapConsumer } from 'react-leaflet'
 import 'leaflet-loading'
 
 import * as S from './styles'
+
+type Cordinates = {
+  longitude: number
+  latitude: number
+}
 
 type Place = {
   id: string
@@ -16,10 +22,7 @@ type Place = {
     text: string
   }
   tags?: [string]
-  cordinates: {
-    longitude: number
-    latitude: number
-  }
+  cordinates: Cordinates
 }
 
 export type MapProps = {
@@ -45,14 +48,40 @@ const CustomTileLayer = () => {
 }
 
 const Map = ({ places }: MapProps) => {
-  const router = useRouter()
+  const baseIcon = {
+    iconUrl: '/img/light-orb.png',
+    iconSize: [50, 50],
+    iconAnchor: [25, 25],
+    popupAnchor: [10, -44],
+  }
+  const [map, setMap] = useState()
+  // @ts-ignore
+  const [mapCenter, setMapCenter] = useState([-15, -55])
+  const [mapZoom, setMapZoom] = useState(3)
+  // @ts-ignore
+  const [iconMarker, setIconMarker] = useState(
+    // @ts-ignore
+    L.icon({
+      ...baseIcon,
+    })
+  )
+
+  const onMarkerClick = (cordinates: Cordinates) => {
+    if (map)
+      // @ts-ignore
+      map.flyTo({ lat: cordinates.latitude, lng: cordinates.longitude }, 18, {
+        animated: true,
+        duration: 2,
+      })
+    setMapZoom(18)
+  }
 
   return (
     <S.MapWrapper>
       <MapContainer
-        center={[-15, -55]}
+        center={[mapCenter[0], mapCenter[1]]}
         attributionControl={false}
-        zoom={3}
+        zoom={mapZoom}
         minZoom={4}
         maxBounds={[
           [-180, 180],
@@ -61,6 +90,8 @@ const Map = ({ places }: MapProps) => {
         // @ts-ignore
         loadingControl={true}
         scrollWheelZoom={true}
+        // @ts-ignore
+        whenCreated={setMap}
         style={{ height: '100%', width: '100%' }}
       >
         <CustomTileLayer />
@@ -87,9 +118,10 @@ const Map = ({ places }: MapProps) => {
               key={`place-${slug}`}
               position={[latitude, longitude]}
               title={name}
+              icon={iconMarker}
               eventHandlers={{
                 click: () => {
-                  router.push(`/place/${slug}`)
+                  onMarkerClick(cordinates)
                 },
               }}
               aria-label={name}

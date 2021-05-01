@@ -1,15 +1,14 @@
 import { createGlobalStyle } from 'styled-components'
-// @ts ignore
 import 'leaflet-loading/src/Control.Loading.css'
 
 const GlobalStyles = createGlobalStyle`
   :root {
-    --highlight: #0ff1e6;
+    --highlight: #f5e042;
     --background: #030518;
     --white: #eeeeee;
     --container: 100rem;
     --small: 1.5rem;
-    --medium: 3rem;
+    --medium: 2.5rem;
     --large: 5rem;
   }
   * {
@@ -36,6 +35,21 @@ const GlobalStyles = createGlobalStyle`
   a {
     color: var(--highlight);
   }
+
+  
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+
+	50% {
+		transform: translatey(-10px);
+	}
+
+	100% {
+		transform: translatey(0px);
+	}
+}
 
 `
 
