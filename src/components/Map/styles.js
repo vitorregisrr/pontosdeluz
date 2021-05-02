@@ -5,7 +5,7 @@ export const MapWrapper = styled.div`
   height: 100%;
 
   .leaflet-container {
-    background-color: #56abca;
+    background-color: #030518;
 
     &::after {
       content: '';
@@ -14,21 +14,21 @@ export const MapWrapper = styled.div`
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #56abca;
+      background-color: #030518;
       background-image: url('/img/star-bg2.gif');
       background-repeat: repeat;
       background-size: cover;
-      background-blend-mode: multiply;
-      opacity: 0.4;
+      background-blend-mode: lighten;
+      opacity: 0.15;
     }
   }
 
   .leaflet-tile-pane {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 
   .leaflet-marker-pane {
-    animation: float 6s;
+    animation: float 6s infinite;
   }
 
   .leaflet-marker-icon {
