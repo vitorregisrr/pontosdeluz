@@ -68,7 +68,7 @@ export const MapHeader = styled.header`
 
 export const MapHeaderBrand = styled.img`
   height: 3.8rem;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: opacity 0.2s ease-in;
 
   &:hover {
