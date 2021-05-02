@@ -11,6 +11,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <title>Pontos de luz • Mapeando a regeneração planetária</title>
         <link rel="shortcut icon" href="/img/light-orb.png" />
         <link rel="apple-touch-icon" href="/img/light-orb.png" />
         <link rel="manifest" href="/manifest.json" />

@@ -76,7 +76,7 @@ const Map = ({ places }: MapProps) => {
   }
 
   return (
-    <S.MapWrapper>
+    <S.MapWrapper className={`${mapZoom > 14 ? 'upperMarkers' : ''}`}>
       <MapContainer
         center={[mapCenter[0], mapCenter[1]]}
         attributionControl={false}
@@ -107,6 +107,7 @@ const Map = ({ places }: MapProps) => {
 
             map.on('zoomend', () => {
               setMapZoom(map.getZoom())
+              console.log(map.getZoom())
             })
 
             return null

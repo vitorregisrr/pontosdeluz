@@ -5,14 +5,25 @@ export const MapWrapper = styled.div`
   height: 100%;
 
   .leaflet-container {
-    background-color: #75cff0;
-    background-image: url('/img/star-bg.gif');
-    background-repeat: repeat;
-    background-blend-mode: overlay;
+    background-color: #56abca;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #56abca;
+      background-image: url('/img/star-bg.gif');
+      background-repeat: repeat;
+      background-blend-mode: overlay;
+      opacity: 0.4;
+    }
   }
 
   .leaflet-tile-pane {
-    opacity: 0.7;
+    opacity: 0.4;
   }
 
   .leaflet-marker-pane {
@@ -24,11 +35,16 @@ export const MapWrapper = styled.div`
     border: none;
     background-image: url('/img/light-orb.png');
     background-position: center center;
-    background-size: 60px 60px;
-    transition: background-size 0.3s ease-in-out, transform 0.1s;
+    background-size: contain;
+    width: 60px !important;
+    height: 60px !important;
+    transition: all 0.3s ease-in-out, transform 0.1s;
 
     &:hover {
-      background-size: 70px 70px;
+      width: 74px !important;
+      height: 74px !important;
+      margin-top: -32px !important;
+      margin-left: -32px !important;
     }
   }
 
@@ -52,6 +68,22 @@ export const MapWrapper = styled.div`
       a {
         height: 32px;
         line-height: 32px;
+      }
+    }
+  }
+
+  &.upperMarkers {
+    .leaflet-marker-icon {
+      width: 120px !important;
+      height: 120px !important;
+      margin-top: -70px !important;
+      margin-left: -60px !important;
+
+      &:hover {
+        width: 130px !important;
+        height: 130px !important;
+        margin-top: -70px !important;
+        margin-left: -60px !important;
       }
     }
   }
