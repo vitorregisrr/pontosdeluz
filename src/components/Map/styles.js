@@ -8,7 +8,7 @@ export const MapWrapper = styled.div`
     background-color: #75cff0;
     background-image: url('/img/star-bg.gif');
     background-repeat: repeat;
-    background-blend-mode: multiply;
+    background-blend-mode: overlay;
   }
 
   .leaflet-tile-pane {
