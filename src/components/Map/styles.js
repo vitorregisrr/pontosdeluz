@@ -15,15 +15,16 @@ export const MapWrapper = styled.div`
       width: 100%;
       height: 100%;
       background-color: #56abca;
-      background-image: url('/img/star-bg.gif');
+      background-image: url('/img/star-bg2.gif');
       background-repeat: repeat;
-      background-blend-mode: overlay;
+      background-size: cover;
+      background-blend-mode: multiply;
       opacity: 0.4;
     }
   }
 
   .leaflet-tile-pane {
-    opacity: 0.4;
+    opacity: 0.5;
   }
 
   .leaflet-marker-pane {
