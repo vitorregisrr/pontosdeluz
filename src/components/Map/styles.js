@@ -19,7 +19,7 @@ export const MapWrapper = styled.div`
       background-repeat: repeat;
       background-size: cover;
       background-blend-mode: lighten;
-      opacity: 0.15;
+      opacity: 0.25;
     }
   }
 
