@@ -2,6 +2,7 @@ import { useState } from 'react'
 import L from 'leaflet'
 import { MapContainer, TileLayer, Marker, MapConsumer } from 'react-leaflet'
 import 'leaflet-loading'
+import imgHeaderBrand from '../../../public/img/brand.png'
 
 import * as S from './styles'
 
@@ -112,6 +113,10 @@ const Map = ({ places }: MapProps) => {
             return null
           }}
         </MapConsumer>
+
+        <S.MapHeader>
+          <S.MapHeaderBrand src={imgHeaderBrand} />
+        </S.MapHeader>
 
         {places?.map(({ slug, name, cordinates }) => {
           const { latitude, longitude } = cordinates

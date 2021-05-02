@@ -1,13 +1,14 @@
 export default {
   openGraph: {
+    title: 'Pontos de Luz ❇',
     type: 'website',
     locale: 'pt_br',
-    url: 'https://caminomedicina.com.br',
-    site_name: '꧁Camino Medicina',
+    url: 'https://pontosdeluz.com.br',
+    site_name: 'Pontos de luz',
   },
   twitter: {
-    handle: '@caminomedicina',
-    site: '@caminomedicina',
+    handle: '@pontosdeluz',
+    site: '@pontosdeluz',
     cardType: 'summary_large_image',
   },
 }
