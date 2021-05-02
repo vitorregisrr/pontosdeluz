@@ -6,12 +6,13 @@ export const MapWrapper = styled.div`
 
   .leaflet-container {
     background-color: #75cff0;
-    background-image: url('/img/star-bg.png');
+    background-image: url('/img/star-bg.gif');
     background-repeat: repeat;
+    background-blend-mode: multiply;
   }
 
   .leaflet-tile-pane {
-    opacity: 0.7;
+    opacity: 0.75;
   }
 
   .leaflet-marker-pane {
@@ -60,13 +61,13 @@ export const MapHeader = styled.header`
   position: relative;
   display: flex;
   justify-content: flex-start;
-  padding-top: 22px;
+  padding-top: 1.9rem;
   padding-left: 14px;
   z-index: 1222;
 `
 
 export const MapHeaderBrand = styled.img`
-  height: 3.3rem;
+  height: 3.8rem;
   opacity: 0.8;
   transition: opacity 0.2s ease-in;
 
