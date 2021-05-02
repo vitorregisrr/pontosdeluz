@@ -12,7 +12,7 @@ export const MapWrapper = styled.div`
   }
 
   .leaflet-tile-pane {
-    opacity: 0.75;
+    opacity: 0.7;
   }
 
   .leaflet-marker-pane {
