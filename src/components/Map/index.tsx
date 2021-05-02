@@ -50,9 +50,8 @@ const CustomTileLayer = () => {
 const Map = ({ places }: MapProps) => {
   const baseIcon = {
     iconUrl: '/img/light-orb.png',
-    iconSize: [50, 50],
+    iconSize: [60, 60],
     iconAnchor: [25, 25],
-    popupAnchor: [10, -44],
   }
   const [map, setMap] = useState()
   // @ts-ignore
@@ -61,7 +60,7 @@ const Map = ({ places }: MapProps) => {
   // @ts-ignore
   const [iconMarker, setIconMarker] = useState(
     // @ts-ignore
-    L.icon({
+    L.divIcon({
       ...baseIcon,
     })
   )
@@ -105,6 +104,10 @@ const Map = ({ places }: MapProps) => {
             if (width < 768) {
               map.setMinZoom(2)
             }
+
+            map.on('zoomend', () => {
+              setMapZoom(map.getZoom())
+            })
 
             return null
           }}

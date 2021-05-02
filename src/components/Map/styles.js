@@ -17,4 +17,17 @@ export const MapWrapper = styled.div`
   .leaflet-marker-pane {
     animation: float 6s;
   }
+
+  .leaflet-marker-icon {
+    background: none;
+    border: none;
+    background-image: url('/img/light-orb.png');
+    background-position: center center;
+    background-size: 50px 50px;
+    transition: background-size 0.4s ease-in-out, transform 0.2s;
+
+    &:hover {
+      background-size: 60px 60px;
+    }
+  }
 `
