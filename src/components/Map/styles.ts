@@ -55,7 +55,7 @@ export const MapWrapper = styled.div`
       top: 50%;
       transform: translateY(-50%);
       pointer-events: none;
-      color: var(--highlight);
+      color: var(--highligh);
     }
   }
 
@@ -139,4 +139,10 @@ export const MapHeaderBrand = styled.img`
   &:hover {
     opacity: 1;
   }
+`
+
+export const MapHeaderBrandWrapper = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
 `

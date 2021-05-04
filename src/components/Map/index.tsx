@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import L from 'leaflet'
 import {
   MapContainer,
@@ -61,7 +61,7 @@ const Map = ({ places }: MapProps) => {
   }
   const [map, setMap] = useState()
   // @ts-ignore
-  const [mapCenter, setMapCenter] = useState([-15, -55])
+  const [mapCenter, setMapCenter] = useState([-15, -45])
   const [mapZoom, setMapZoom] = useState(3)
   // @ts-ignore
   const [iconMarker, setIconMarker] = useState(
@@ -79,6 +79,11 @@ const Map = ({ places }: MapProps) => {
         duration: 2,
       })
     setMapZoom(18)
+  }
+
+  const onBrandClick = () => {
+    // @ts-ignore
+    if (map) map.flyTo(mapCenter, 3, { animated: true, duration: 1.5 })
   }
 
   return (
@@ -121,7 +126,13 @@ const Map = ({ places }: MapProps) => {
         </MapConsumer>
 
         <S.MapHeader>
-          <S.MapHeaderBrand src={'/img/brand.png'} />
+          <S.MapHeaderBrandWrapper
+            onClick={() => {
+              onBrandClick()
+            }}
+          >
+            <S.MapHeaderBrand src={'/img/brand.png'} />
+          </S.MapHeaderBrandWrapper>
         </S.MapHeader>
 
         {places?.map(({ slug, name, cordinates }) => {
