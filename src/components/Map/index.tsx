@@ -1,6 +1,12 @@
 import { useState } from 'react'
 import L from 'leaflet'
-import { MapContainer, TileLayer, Marker, MapConsumer } from 'react-leaflet'
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  MapConsumer,
+  Tooltip,
+} from 'react-leaflet'
 import 'leaflet-loading'
 
 import * as S from './styles'
@@ -81,7 +87,7 @@ const Map = ({ places }: MapProps) => {
         center={[mapCenter[0], mapCenter[1]]}
         attributionControl={false}
         zoom={mapZoom}
-        minZoom={4}
+        minZoom={3}
         maxBounds={[
           [-180, 180],
           [180, -180],
@@ -133,7 +139,9 @@ const Map = ({ places }: MapProps) => {
                 },
               }}
               aria-label={name}
-            ></Marker>
+            >
+              <Tooltip>{name}</Tooltip>
+            </Marker>
           )
         })}
       </MapContainer>

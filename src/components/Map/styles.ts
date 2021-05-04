@@ -32,29 +32,45 @@ export const MapWrapper = styled.div`
   }
 
   .leaflet-marker-icon {
+    position: relative;
     background: none;
     border: none;
     background-image: url('/img/light-orb.png');
     background-position: center center;
     background-size: contain;
-    width: 60px !important;
-    height: 60px !important;
+    width: 50px !important;
+    height: 50px !important;
     transition: all 0.3s ease-in-out, transform 0.1s;
 
     &:hover {
-      width: 74px !important;
-      height: 74px !important;
-      margin-top: -32px !important;
-      margin-left: -32px !important;
+      width: 59px !important;
+      height: 59px !important;
+      margin-top: -29px !important;
+      margin-left: -29px !important;
+    }
+
+    .marker-name {
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--highlight);
     }
   }
 
   .leaflet-control-container {
     .leaflet-top {
-      top: 65px;
+      top: 53px;
+      left: -5px;
       opacity: 0.85;
       transition: opacity 0.2s ease-in;
       padding-left: 3px;
+
+      @media screen and (min-width: 768px) {
+        top: 65px;
+        left: 0;
+      }
 
       &:hover {
         opacity: 1;
@@ -71,19 +87,27 @@ export const MapWrapper = styled.div`
         line-height: 32px;
       }
     }
+
+    .leaflet-bar.leaflet-control {
+      transform: scale(0.9);
+
+      @media screen and (min-width: 768px) {
+        transform: scale(0.98);
+      }
+    }
   }
 
   &.upperMarkers {
     .leaflet-marker-icon {
-      width: 120px !important;
-      height: 120px !important;
-      margin-top: -70px !important;
-      margin-left: -60px !important;
+      width: 110px !important;
+      height: 110px !important;
+      margin-top: -55px !important;
+      margin-left: -55px !important;
 
       &:hover {
-        width: 130px !important;
-        height: 130px !important;
-        margin-top: -70px !important;
+        width: 120px !important;
+        height: 120px !important;
+        margin-top: -60px !important;
         margin-left: -60px !important;
       }
     }
@@ -95,14 +119,22 @@ export const MapHeader = styled.header`
   display: flex;
   justify-content: flex-start;
   padding-top: 1.9rem;
-  padding-left: 14px;
+  padding-left: 1.2rem;
   z-index: 1222;
+
+  @media screen and (min-width: 768px) {
+    padding-left: 1.54rem;
+  }
 `
 
 export const MapHeaderBrand = styled.img`
-  height: 3.6rem;
+  height: 3rem;
   opacity: 0.9;
   transition: opacity 0.2s ease-in;
+
+  @media screen and (min-width: 768px) {
+    height: 3.6rem;
+  }
 
   &:hover {
     opacity: 1;

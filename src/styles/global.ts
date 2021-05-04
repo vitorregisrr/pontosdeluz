@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
     --small: 1.5rem;
     --medium: 2.5rem;
     --large: 5rem;
+
   }
   * {
     margin: 0;
