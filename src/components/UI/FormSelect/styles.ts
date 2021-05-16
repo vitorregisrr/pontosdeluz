@@ -4,7 +4,7 @@ export const FormSelectWrapper = styled.div`
   .react-select {
     &__control {
       border: none;
-      height: 34px;
+      min-height: 35px;
       border-radius: 16px;
       width: 200px;
       box-shadow: 3px 4px 15px rgba(0, 0, 0, 0.15);

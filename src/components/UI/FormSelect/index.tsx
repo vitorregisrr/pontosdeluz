@@ -13,7 +13,9 @@ type FormSelectProps = {
 const animatedComponents = makeAnimated()
 
 const colourStyles = {
+  //@ts-ignore
   control: (styles) => ({ ...styles, backgroundColor: 'white' }),
+  //@ts-ignore
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     const color = chroma(data.color)
     return {
@@ -41,6 +43,7 @@ const colourStyles = {
       },
     }
   },
+  //@ts-ignore
   multiValue: (styles, { data }) => {
     const color = chroma(data.color)
     return {
@@ -48,10 +51,12 @@ const colourStyles = {
       backgroundColor: color.alpha(0.1).css(),
     }
   },
+  //@ts-ignore
   multiValueLabel: (styles, { data }) => ({
     ...styles,
     color: data.color,
   }),
+  //@ts-ignore
   multiValueRemove: (styles, { data }) => ({
     ...styles,
     color: data.color,
