@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import L from 'leaflet'
 import {
   MapContainer,
@@ -8,6 +8,8 @@ import {
   Tooltip,
 } from 'react-leaflet'
 import 'leaflet-loading'
+
+import { FormInput, FormSelect } from 'components/UI/'
 
 import * as S from './styles'
 
@@ -133,6 +135,31 @@ const Map = ({ places }: MapProps) => {
           >
             <S.MapHeaderBrand src={'/img/brand.png'} />
           </S.MapHeaderBrandWrapper>
+
+          <S.MapHeaderFilters>
+            <FormInput placeholder="Pesquisar por cidade, país, rua..." />
+            <FormInput placeholder="Pesquisar um ponto pelo nome..." />
+            <FormSelect
+              placeholder="Filtrar por categoria..."
+              options={[
+                {
+                  label: 'Ecovilas',
+                  value: 'ecovilas',
+                  color: '#316817',
+                },
+                {
+                  label: 'Retiros',
+                  value: 'retiros',
+                  color: '#4669db',
+                },
+                {
+                  label: 'Centros Espirituais',
+                  value: 'centrosespirituais',
+                  color: '#6438cc',
+                },
+              ]}
+            />
+          </S.MapHeaderFilters>
         </S.MapHeader>
 
         {places?.map(({ slug, name, cordinates }) => {

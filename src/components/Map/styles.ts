@@ -146,3 +146,12 @@ export const MapHeaderBrandWrapper = styled.button`
   background: none;
   cursor: pointer;
 `
+export const MapHeaderFilters = styled.form`
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+
+  input {
+    margin-right: 15px;
+  }
+`

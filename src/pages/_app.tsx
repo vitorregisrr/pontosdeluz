@@ -6,12 +6,13 @@ import { DefaultSeo } from 'next-seo'
 import SEO from '../../next-seo.config'
 
 import GlobalStyles from 'styles/global'
+import { FontsLoader } from './fonts'
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Pontos de Luz • Regeneração planetária mapeada</title>
+        <title>Pontos de Luz • Regeneração planetária ao redor do mundo</title>
         <link rel="shortcut icon" href="/img/light-orb.png" />
         <link rel="apple-touch-icon" href="/img/light-orb.png" />
         <link rel="manifest" href="/manifest.json" />
@@ -25,6 +26,7 @@ function App({ Component, pageProps }: AppProps) {
           name="google-site-verification"
           content="HYb0LBHuY2FMcpYcET1w6V0LjpKdnkDiLHg0CBhNHfQ"
         />
+        <FontsLoader />
       </Head>
       <DefaultSeo {...SEO} />
       <GlobalStyles />

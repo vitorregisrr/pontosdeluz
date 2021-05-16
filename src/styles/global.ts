@@ -16,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
   }
   html {
     font-size: 62.5%;
@@ -26,7 +27,6 @@ const GlobalStyles = createGlobalStyle`
     color: var(--white);
   }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
   }
   p,
   a {
