@@ -10,6 +10,8 @@ import {
 import 'leaflet-loading'
 
 import { FormInput, FormSelect } from 'components/UI/'
+import PlaceInfo from 'components/PlaceInfo'
+import MapHeader from './MapHeader'
 
 import * as S from './styles'
 
@@ -72,6 +74,11 @@ const Map = ({ places }: MapProps) => {
       ...baseIcon,
     })
   )
+  const [currFilters, setCurrFilters] = useState({
+    adress: '',
+    name: '',
+    filters: [''],
+  })
 
   const onMarkerClick = (cordinates: Cordinates) => {
     if (map)
@@ -83,13 +90,15 @@ const Map = ({ places }: MapProps) => {
     setMapZoom(18)
   }
 
-  const onBrandClick = () => {
+  const zoomOut = () => {
     // @ts-ignore
     if (map) map.flyTo(mapCenter, 3, { animated: true, duration: 1.5 })
   }
 
   return (
     <S.MapWrapper className={`${mapZoom > 14 ? 'upperMarkers' : ''}`}>
+      <MapHeader zoomOutMap={zoomOut} />
+      <PlaceInfo data={{ id: '1', name: 'Ponto 1' }} isVisible={true} />
       <MapContainer
         center={[mapCenter[0], mapCenter[1]]}
         attributionControl={false}
@@ -126,41 +135,6 @@ const Map = ({ places }: MapProps) => {
             return null
           }}
         </MapConsumer>
-
-        <S.MapHeader>
-          <S.MapHeaderBrandWrapper
-            onClick={() => {
-              onBrandClick()
-            }}
-          >
-            <S.MapHeaderBrand src={'/img/brand.png'} />
-          </S.MapHeaderBrandWrapper>
-
-          <S.MapHeaderFilters>
-            <FormInput placeholder="Pesquisar por cidade, país, rua..." />
-            <FormInput placeholder="Pesquisar um ponto pelo nome..." />
-            <FormSelect
-              placeholder="Filtrar por categoria..."
-              options={[
-                {
-                  label: 'Ecovilas',
-                  value: 'ecovilas',
-                  color: '#316817',
-                },
-                {
-                  label: 'Retiros',
-                  value: 'retiros',
-                  color: '#4669db',
-                },
-                {
-                  label: 'Centros Espirituais',
-                  value: 'centrosespirituais',
-                  color: '#6438cc',
-                },
-              ]}
-            />
-          </S.MapHeaderFilters>
-        </S.MapHeader>
 
         {places?.map(({ slug, name, cordinates }) => {
           const { latitude, longitude } = cordinates

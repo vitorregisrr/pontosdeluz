@@ -1,12 +1,18 @@
-import * as S from './styles'
+import { useState } from 'react'
 import chroma from 'chroma-js'
 import makeAnimated from 'react-select/animated'
+import { StyledIcon } from 'styled-icons/types'
 import Select from 'react-select'
+
+import * as S from './styles'
+
+type ValuesProps = { value: string; label: string; color?: string }[]
 
 type FormSelectProps = {
   placeholder?: string
-  options: { value: string; label: string; color?: string }[]
+  options: ValuesProps
   style?: string
+  Icon?: StyledIcon
   onChange?: () => void
 }
 
@@ -35,7 +41,6 @@ const colourStyles = {
           : 'black'
         : data.color,
       cursor: isDisabled ? 'not-allowed' : 'default',
-
       ':active': {
         ...styles[':active'],
         backgroundColor:
@@ -70,20 +75,32 @@ const colourStyles = {
 const FormSelect = ({
   placeholder,
   options,
-  style,
   onChange,
+  Icon,
 }: FormSelectProps) => {
+  const [selectedValues, setSelectedValues] = useState()
+
+  const handleChange = (values: ValuesProps) => {
+    //@ts-ignore
+    setSelectedValues(values)
+  }
+
   return (
-    <S.FormSelectWrapper>
+    <S.FormSelectWrapper className="select-wrapper">
       <Select
-        options={options}
-        closeMenuOnSelect={false}
-        components={animatedComponents}
-        placeholder={placeholder}
         classNamePrefix="react-select"
-        styles={colourStyles}
+        value={selectedValues}
+        onChange={(v) => handleChange(v)}
+        options={options}
         isMulti
+        placeholder={placeholder}
+        closeMenuOnSelect={true}
+        components={animatedComponents}
+        styles={colourStyles}
       />
+
+      {/* @ts-ignore */}
+      {Icon ? <Icon className="icon" /> : null}
     </S.FormSelectWrapper>
   )
 }
