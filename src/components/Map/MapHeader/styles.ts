@@ -49,7 +49,6 @@ export const MapHeaderFilters = styled.form`
   .input-wrapper {
     flex: 1;
     margin-right: 15px;
-
     @media screen and (min-width: 1100px) {
       flex: 0.3;
     }
@@ -68,6 +67,7 @@ export const MapHeaderFilters = styled.form`
 
     @media screen and (min-width: 1300px) {
       flex: 0.23;
+      max-width: 330px;
     }
   }
 `
