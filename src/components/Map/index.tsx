@@ -9,8 +9,7 @@ import {
 } from 'react-leaflet'
 import 'leaflet-loading'
 
-import { FormInput, FormSelect } from 'components/UI/'
-import PlaceInfo from 'components/PlaceInfo'
+import PlacePane from 'components/PlacePane'
 import MapHeader from './MapHeader'
 
 import * as S from './styles'
@@ -98,7 +97,7 @@ const Map = ({ places }: MapProps) => {
   return (
     <S.MapWrapper className={`${mapZoom > 14 ? 'upperMarkers' : ''}`}>
       <MapHeader zoomOutMap={zoomOut} />
-      <PlaceInfo data={{ id: '1', name: 'Ponto 1' }} isVisible={true} />
+      <PlacePane data={{ id: '1', name: 'Ponto 1' }} isVisible={true} />
       <MapContainer
         center={[mapCenter[0], mapCenter[1]]}
         attributionControl={false}
