@@ -19,8 +19,6 @@ export const FormSelectWrapper = styled.div`
       &:hover,
       &--menu-is-open {
         transform: scale(1.05);
-        opacity: 0.94;
-        box-shadow: 1px 1px 6px rgba(233, 199, 10, 0.4);
       }
     }
 
@@ -33,14 +31,16 @@ export const FormSelectWrapper = styled.div`
       opacity: 0.94;
       border-radius: 16px;
       overflow: hidden;
+      animation: fadeIn 0.4s ease-in-out;
     }
 
     &__option {
-      opacity: 0.94;
-      border-radius: 16px;
-      cursor: pointer;
-      font-size: 12px;
+      font-size: 1.1rem;
+      padding: 8px 10px;
       text-align: center;
+      border-radius: 16px;
+      opacity: 0.94;
+      cursor: pointer;
     }
 
     &__indicator {

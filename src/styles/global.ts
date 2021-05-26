@@ -23,6 +23,8 @@ const GlobalStyles = createGlobalStyle`
   }
   html, body, #__next {
     height: 100%;
+    width: 100%;
+    overflow: hidden;
     background: var(--background);
     color: var(--white);
   }
@@ -51,6 +53,18 @@ const GlobalStyles = createGlobalStyle`
 		transform: translatey(0px);
 	}
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 `
 

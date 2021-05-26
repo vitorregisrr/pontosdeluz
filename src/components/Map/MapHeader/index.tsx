@@ -1,4 +1,4 @@
-import { FormInput, FormSelect } from 'components/UI/'
+import { FormInputSearch, FormSelect, FormGoogleMaps } from 'components/UI/'
 import { Map } from '@styled-icons/entypo'
 import { Sparkles } from '@styled-icons/ionicons-outline'
 
@@ -20,11 +20,15 @@ const MapHeader = ({ zoomOutMap = () => true }: MapHeaderProps) => {
       </S.MapHeaderBrandWrapper>
 
       <S.MapHeaderFilters>
-        <FormInput
+        <FormInputSearch
           Icon={Sparkles}
+          options={[{ value: 'Ponto 1' }]}
           placeholder="Pesquisar um ponto pelo nome..."
         />
-        <FormInput Icon={Map} placeholder="Pesquisar um país, cidade, rua..." />
+        <FormGoogleMaps
+          Icon={Map}
+          placeholder="Pesquisar um país, cidade, rua..."
+        />
         <FormSelect
           placeholder="Filtrar por categorias..."
           options={[
@@ -34,26 +38,36 @@ const MapHeader = ({ zoomOutMap = () => true }: MapHeaderProps) => {
               color: '#307012',
             },
             {
-              label: 'Natureza e Lazer',
+              label: 'Natureza',
               value: 'naturezaelazer',
-              color: '#94df62',
+              color: '#b96a52',
             },
             {
-              label: 'Espiritualidade',
-              value: 'espiritualidade',
+              label: 'Terapias Holísticas',
+              value: 'terapiasholisticas',
               color: '#815dd6',
             },
             {
               label: 'Budismo',
               value: 'budismo',
-              color: '#5c82d4',
+              color: '#d49c5c',
+            },
+            {
+              label: 'Yoga',
+              value: 'yoga',
+              color: '#b85cb3',
             },
             {
               label: 'Xamanismo',
               value: 'xamanismo',
               color: '#533212',
             },
-          ]}
+            {
+              label: 'Templos Espirituais',
+              value: 'templosespirituais',
+              color: '#627fcf',
+            },
+          ].sort((a, b) => (a.label > b.label ? 1 : -1))}
         />
       </S.MapHeaderFilters>
     </S.MapHeaderWrapper>

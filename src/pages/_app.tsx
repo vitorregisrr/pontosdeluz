@@ -22,6 +22,11 @@ function App({ Component, pageProps }: AppProps) {
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossOrigin=""
         />
+        <script
+          type="text/javascript"
+          src="https://maps.google.com/maps/api/js?key=AIzaSyDAAbOGMKsKG-fQAqxRG_psTp2GJsHlsPo&sensor=false&libraries=places"
+          defer
+        ></script>
         <meta
           name="google-site-verification"
           content="HYb0LBHuY2FMcpYcET1w6V0LjpKdnkDiLHg0CBhNHfQ"

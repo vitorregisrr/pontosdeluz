@@ -40,7 +40,7 @@ export const MapWrapper = styled.div`
     background-size: contain;
     width: 50px !important;
     height: 50px !important;
-    transition: all 0.3s ease-in-out, transform 0.1s;
+    transition: all 0.3s, transform 0.1s;
 
     &:hover {
       width: 59px !important;
