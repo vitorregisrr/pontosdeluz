@@ -1,14 +1,28 @@
 import styled from 'styled-components'
 
+type PlacePaneWrapperProps = {
+  isVisible: boolean
+}
+
 export const PlacePaneWrapper = styled.div`
   position: absolute;
   top: 17.6%;
-  right: 30px;
+  right: 40px;
   z-index: 800;
   opacity: 1;
+  transition: all 0.3s ease-in;
+
+  ${(props: PlacePaneWrapperProps) => `
+      ${
+        !props.isVisible
+          ? 'pointer-events: none; opacity: 0; transform: translateX(300px)'
+          : ''
+      }
+  `}
 `
 
 export const PlacePanePane = styled.div`
+  position: relative;
   width: 390px;
   height: 70vh;
   border-radius: 18px;
@@ -163,7 +177,7 @@ export const PlacePaneMoreLinkWrapper = styled.div`
   color: #fff;
   word-wrap: nowrap;
   cursor: pointer;
-  background-color: #1d0840;
+  background-color: #0f0324;
   border-radius: 14px;
   transition: all 0.4s;
 
@@ -174,5 +188,36 @@ export const PlacePaneMoreLinkWrapper = styled.div`
 
   &:hover {
     transform: scale(1.05);
+  }
+`
+
+export const PlacePaneCloseButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 20px;
+  z-index: 10;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  padding: 4px 7px;
+  transform: translateY(-100%);
+  border-radius: 12px 12px 0 0;
+  opacity: 0.9;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    padding-bottom: 10px;
+    opacity: 1;
+  }
+
+  svg {
+    width: 10px;
+    color: #0f0324;
+    transition: all 0.4s;
   }
 `

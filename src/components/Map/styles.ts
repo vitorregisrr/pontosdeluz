@@ -29,6 +29,10 @@ export const MapWrapper = styled.div`
 
   .leaflet-marker-pane {
     animation: float 6s infinite;
+
+    &:hover {
+      animation: none;
+    }
   }
 
   .leaflet-marker-icon {
@@ -56,6 +60,142 @@ export const MapWrapper = styled.div`
       transform: translateY(-50%);
       pointer-events: none;
       color: var(--highligh);
+    }
+  }
+
+  .leaflet-popup {
+    position: relative;
+    white-space: pre-wrap;
+    width: 115px;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: none;
+    border: 0px;
+    transition: opacity 0.4s, transform 0.1s;
+
+    .leaflet-popup-close-button {
+      display: none;
+    }
+
+    &-content {
+      width: 100%;
+      margin: 0 !important;
+
+      &-wrapper {
+        padding: 0;
+        opacity: 0.87;
+      }
+    }
+
+    .leaflet-popup-tip {
+      opacity: 0.87;
+    }
+
+    img {
+      width: 100%;
+      height: 44.5px;
+      margin: 0;
+      padding: 0;
+      border-radius: 10px 10px 0 0;
+      object-fit: cover;
+    }
+
+    .body {
+      width: 100%;
+      padding: 3px 4px 9px 10px;
+
+      .name {
+        display: block;
+        font-size: 1.2rem;
+        line-height: 1.3;
+        margin-bottom: 0;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.9);
+      }
+
+      .resume {
+        font-weight: 400;
+        font-size: 0.9rem;
+        color: rgba(0, 0, 0, 0.4);
+        line-height: 1.2;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        height: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+
+      .span {
+        font-size: 0.85rem;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
+  .leaflet-tooltip-pane {
+    .leaflet-tooltip {
+      position: relative;
+      white-space: pre-wrap;
+      width: 115px;
+      padding: 0;
+      background-color: rgba(250, 250, 250, 0.8);
+      border-radius: 10px;
+      box-shadow: none;
+      border: 0px;
+      transition: opacity 0.4s, transform 0.1s;
+
+      &.hide {
+        display: none !important;
+      }
+
+      &::before {
+        opacity: 0.8;
+        top: 75%;
+      }
+
+      img {
+        width: 100%;
+        height: 44.5px;
+        margin: 0;
+        padding: 0;
+        border-radius: 10px 10px 0 0;
+        object-fit: cover;
+      }
+
+      .body {
+        padding: 3px 4px 9px 10px;
+
+        .name {
+          display: block;
+          font-size: 1.2rem;
+          line-height: 1.3;
+          margin-bottom: 0;
+          font-weight: bold;
+          color: rgba(0, 0, 0, 0.9);
+        }
+
+        .resume {
+          font-weight: 400;
+          font-size: 0.9rem;
+          color: rgba(0, 0, 0, 0.4);
+          line-height: 1.2;
+          margin-top: 4px;
+          height: 30px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+
+        .span {
+          font-size: 0.85rem;
+          color: rgba(0, 0, 0, 0.5);
+        }
+      }
     }
   }
 
@@ -110,6 +250,12 @@ export const MapWrapper = styled.div`
         margin-top: -60px !important;
         margin-left: -60px !important;
       }
+    }
+  }
+
+  &.isPlacePaneOpen {
+    .leaflet-tooltip {
+      display: none !important;
     }
   }
 `

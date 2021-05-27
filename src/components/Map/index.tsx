@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import L from 'leaflet'
 import {
   MapContainer,
   TileLayer,
   Marker,
   MapConsumer,
+  Popup,
   Tooltip,
 } from 'react-leaflet'
 import 'leaflet-loading'
@@ -79,13 +80,22 @@ const Map = ({ places }: MapProps) => {
     filters: [''],
   })
 
+  const [isPlacePaneOpen, setIsPlacePaneOpen] = useState(false)
+
   const onMarkerClick = (cordinates: Cordinates) => {
     if (map)
       // @ts-ignore
-      map.flyTo({ lat: cordinates.latitude, lng: cordinates.longitude }, 18, {
-        animated: true,
-        duration: 2,
-      })
+      map.flyTo(
+        {
+          lat: cordinates.latitude + 0.0002,
+          lng: cordinates.longitude + 0.0008,
+        },
+        18,
+        {
+          animated: true,
+          duration: 2,
+        }
+      )
     setMapZoom(18)
   }
 
@@ -94,10 +104,24 @@ const Map = ({ places }: MapProps) => {
     if (map) map.flyTo(mapCenter, 3, { animated: true, duration: 1.5 })
   }
 
+  const closePlacePane = () => {
+    // @ts-ignore
+    document.querySelector('.leaflet-popup-close-button').click()
+    setIsPlacePaneOpen(false)
+  }
+
   return (
-    <S.MapWrapper className={`${mapZoom > 14 ? 'upperMarkers' : ''}`}>
+    <S.MapWrapper
+      className={`${mapZoom > 14 ? 'upperMarkers' : ''} ${
+        isPlacePaneOpen ? 'isPlacePaneOpen' : ''
+      }`}
+    >
       <MapHeader zoomOutMap={zoomOut} />
-      <PlacePane data={{ id: '1', name: 'Ponto 1' }} isVisible={true} />
+      <PlacePane
+        data={{ id: '1', name: 'Ponto 1' }}
+        isVisible={isPlacePaneOpen}
+        closePane={() => closePlacePane()}
+      />
       <MapContainer
         center={[mapCenter[0], mapCenter[1]]}
         attributionControl={false}
@@ -128,30 +152,62 @@ const Map = ({ places }: MapProps) => {
 
             map.on('zoomend', () => {
               setMapZoom(map.getZoom())
-              console.log(map.getZoom())
             })
 
             return null
           }}
         </MapConsumer>
 
-        {places?.map(({ slug, name, cordinates }) => {
+        {places?.map(({ slug, name, resume, cordinates }) => {
           const { latitude, longitude } = cordinates
 
           return (
             <Marker
               key={`place-${slug}`}
               position={[latitude, longitude]}
-              title={name}
               icon={iconMarker}
               eventHandlers={{
                 click: () => {
                   onMarkerClick(cordinates)
+                  setIsPlacePaneOpen((old) => !old)
                 },
               }}
               aria-label={name}
             >
-              <Tooltip>{name}</Tooltip>
+              {/* @ts-ignore */}
+              <Tooltip offset={[14, -29]}>
+                <img
+                  alt="Aldeia Indigena Yanawá"
+                  src="/img/indigenasyanawa.png"
+                ></img>
+                <div className="body">
+                  <h2 className="name">{name}</h2>
+                  <p className="resume">
+                    Qual Amazônia você quer conhecer? Sua verde imensidão abriga
+                    ao mesmo tempo uma floresta, nove países, a maior
+                    biodiversidade do mundo em um ecossistema tropical, nove
+                    estados brasileiros e a maior população indígena do Brasil.
+                  </p>
+                  <span className="span">Clique para abrir</span>
+                </div>
+              </Tooltip>
+
+              <Popup offset={[0, -180]} closeOnClick={false}>
+                <img
+                  alt="Aldeia Indigena Yanawá"
+                  src="/img/indigenasyanawa.png"
+                ></img>
+                <div className="body">
+                  <h2 className="name">{name}</h2>
+                  <p className="resume">
+                    Qual Amazônia você quer conhecer? Sua verde imensidão abriga
+                    ao mesmo tempo uma floresta, nove países, a maior
+                    biodiversidade do mundo em um ecossistema tropical, nove
+                    estados brasileiros e a maior população indígena do Brasil.
+                  </p>
+                  <span className="span">Clique para fechar</span>
+                </div>
+              </Popup>
             </Marker>
           )
         })}

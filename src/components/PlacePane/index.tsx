@@ -1,6 +1,7 @@
 import SimpleBar from 'simplebar-react'
 import { Share as ShareIcon } from '@styled-icons/remix-line'
 import { ArrowRight as ArrowRightIcon } from '@styled-icons/typicons'
+import { Times as TimesIcon } from '@styled-icons/fa-solid/Times'
 import Link from 'next/link'
 
 import 'simplebar/dist/simplebar.min.css'
@@ -12,12 +13,20 @@ type PlacePaneProps = {
     id: string
     name: string
   }
+  closePane: () => void
 }
 
-const PlacePane = ({ isVisible = false, data }: PlacePaneProps) => {
+const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
+  const onCloseButtonClick = () => {
+    closePane()
+  }
+
   return (
-    <S.PlacePaneWrapper>
+    <S.PlacePaneWrapper isVisible={isVisible}>
       <S.PlacePanePane>
+        <S.PlacePaneCloseButton onClick={onCloseButtonClick}>
+          <TimesIcon />
+        </S.PlacePaneCloseButton>
         {/* Img */}
         <S.PlacePaneImgWrapper>
           <S.PlacePaneImg src="/img/indigenasyanawa.png" />

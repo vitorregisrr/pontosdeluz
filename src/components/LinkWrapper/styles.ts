@@ -12,8 +12,8 @@ export const Wrapper = styled.div`
 
   @media screen and (min-width: 768px) {
     transform: scale(1);
-    top: calc(var(--medium) - 6px);
-    right: calc(var(--medium) - 5px);
+    top: calc(var(--medium));
+    right: calc(var(--medium) - 4px);
   }
 
   svg {
