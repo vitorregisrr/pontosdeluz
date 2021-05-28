@@ -22,7 +22,7 @@ type FormInputSearchProps = {
 }
 
 const FormInputSearch = ({
-  placeholder,
+  placeholder = undefined,
   Icon,
   options,
 }: FormInputSearchProps) => {
@@ -69,7 +69,7 @@ const FormInputSearch = ({
 
   // Properties of input element
   const inputProps = {
-    placeholder: placeholder,
+    placeholder,
     value: currentValue,
     onChange: onChangeHandler,
   }
@@ -83,6 +83,7 @@ const FormInputSearch = ({
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
+        /* @ts-ignore */
         inputProps={inputProps}
       />
       {/* @ts-ignore */}
