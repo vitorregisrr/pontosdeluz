@@ -24,7 +24,10 @@ const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
   return (
     <S.PlacePaneWrapper isVisible={isVisible}>
       <S.PlacePanePane>
-        <S.PlacePaneCloseButton onClick={onCloseButtonClick}>
+        <S.PlacePaneCloseButton
+          className="close-button"
+          onClick={onCloseButtonClick}
+        >
           <TimesIcon />
         </S.PlacePaneCloseButton>
         {/* Img */}

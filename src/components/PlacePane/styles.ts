@@ -15,7 +15,7 @@ export const PlacePaneWrapper = styled.div`
   ${(props: PlacePaneWrapperProps) => `
       ${
         !props.isVisible
-          ? 'pointer-events: none; opacity: 0; transform: translateX(300px)'
+          ? 'pointer-events: none; opacity: 0; transform: translateX(300px); .close-button{transform: translateY(50px)}'
           : ''
       }
   `}
@@ -195,7 +195,7 @@ export const PlacePaneCloseButton = styled.button`
   position: absolute;
   top: 0;
   right: 20px;
-  z-index: 10;
+  z-index: -1;
   background-color: #fff;
   border: none;
   outline: none;
