@@ -31,14 +31,13 @@ const FormPlaces = ({ placeholder, onChange, Icon }: FormPlacesProps) => {
     setInputValue(address)
     geocodeByAddress(address)
       .then((results) => {
-        console.log(results[0])
+        // @ts-ignore
+        onChange(results[0])
         return getLatLng(results[0])
       })
       .then((latLng) => setSelectedAdress(latLng))
       .catch((error) => console.error('Error', error))
   }
-
-  console.log(placeholder)
 
   return (
     <S.FormPlacesWrapper className="input-wrapper">

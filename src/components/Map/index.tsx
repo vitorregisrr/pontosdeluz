@@ -9,6 +9,8 @@ import {
   Tooltip,
 } from 'react-leaflet'
 import 'leaflet-loading'
+import { Times as TimesIcon } from '@styled-icons/fa-solid'
+import { Plus as PlusIcon } from '@styled-icons/fa-solid'
 
 import PlacePane from 'components/PlacePane'
 import MapHeader from './MapHeader'
@@ -39,6 +41,13 @@ export type MapProps = {
   places?: Place[]
 }
 
+type AdressProps = {
+  geometry: {
+    bounds: any
+    location: any
+  }
+}
+
 const MAPBOX_API_KEY = process.env.NEXT_PUBLIC_MAPBOX_API_KEY
 const MAPBOX_USERID = process.env.NEXT_PUBLIC_MAPBOX_USERID
 const MAPBOX_STYLEID = process.env.NEXT_PUBLIC_MAPBOX_STYLEID
@@ -61,12 +70,14 @@ const Map = ({ places }: MapProps) => {
   const baseIcon = {
     iconUrl: '/img/light-orb.png',
     iconSize: [60, 60],
-    iconAnchor: [25, 25],
+    iconAnchor: [27, 27],
   }
+
   const [map, setMap] = useState()
   // @ts-ignore
   const [mapCenter, setMapCenter] = useState([-15, -45])
   const [mapZoom, setMapZoom] = useState(3)
+  const markersRefs = useRef([])
   // @ts-ignore
   const [iconMarker, setIconMarker] = useState(
     // @ts-ignore
@@ -81,33 +92,89 @@ const Map = ({ places }: MapProps) => {
   })
 
   const [isPlacePaneOpen, setIsPlacePaneOpen] = useState(false)
+  const [currentSlug, setCurrentSlug] = useState('')
 
-  const onMarkerClick = (cordinates: Cordinates) => {
-    if (map)
-      // @ts-ignore
-      map.flyTo(
-        {
-          lat: cordinates.latitude + 0.0002,
-          lng: cordinates.longitude + 0.0008,
-        },
-        18,
-        {
-          animated: true,
-          duration: 2,
-        }
-      )
+  const closePlace = () => {
+    setCurrentSlug('')
+    closePopupFix()
+    setIsPlacePaneOpen(false)
+  }
+
+  const openPlace = (slug: string) => {
+    if (isPlacePaneOpen) {
+      closePlace()
+      setTimeout(() => setIsPlacePaneOpen(true), 300)
+    }
+
+    const cordinates = places?.filter((place) => place.slug === slug)[0]
+      .cordinates
+    // @ts-ignore
+    map.flyTo(
+      {
+        // @ts-ignore
+        lat: cordinates.latitude + 0.0002,
+        // @ts-ignore
+        lng: cordinates.longitude + 0.0008,
+      },
+      18,
+      {
+        animated: true,
+        duration: 2,
+      }
+    )
     setMapZoom(18)
+    setCurrentSlug(slug)
+
+    if (!isPlacePaneOpen) {
+      setIsPlacePaneOpen(true)
+    }
+  }
+
+  const closePopupFix = () => {
+    const popupSelector = document.querySelector('.leaflet-popup-close-button')
+    if (popupSelector) {
+      // @ts-ignore
+      popupSelector.click()
+    }
+  }
+
+  const onMarkerClick = (slug: string) => {
+    console.log(markersRefs)
+    if (slug !== currentSlug) {
+      openPlace(slug)
+    } else {
+      closePlace()
+    }
   }
 
   const zoomOut = () => {
     // @ts-ignore
     if (map) map.flyTo(mapCenter, 3, { animated: true, duration: 1.5 })
+    closePlace()
   }
 
-  const closePlacePane = () => {
-    // @ts-ignore
-    document.querySelector('.leaflet-popup-close-button').click()
-    setIsPlacePaneOpen(false)
+  const setMapPosition = (adress: AdressProps) => {
+    closePlace()
+
+    if (adress.geometry.bounds) {
+      const bounds = adress.geometry.bounds
+      // @ts-ignore
+      map.flyToBounds([
+        [bounds.Ua.g, bounds.La.g],
+        [bounds.Ua.i, bounds.La.i],
+      ])
+    } else if (adress.geometry.location) {
+      console.log()
+      // @ts-ignore
+      map.flyTo(
+        {
+          lat: adress.geometry.location.lat(),
+          lng: adress.geometry.location.lng(),
+        },
+        17,
+        { animated: true, duration: 1.5 }
+      )
+    }
   }
 
   return (
@@ -116,11 +183,28 @@ const Map = ({ places }: MapProps) => {
         isPlacePaneOpen ? 'isPlacePaneOpen' : ''
       }`}
     >
-      <MapHeader zoomOutMap={zoomOut} />
+      <MapHeader
+        /* @ts-ignore */
+        setMapPosition={setMapPosition}
+        /* @ts-ignore */
+        openPlace={openPlace}
+        zoomOutMap={zoomOut}
+        /* @ts-ignore */
+        placesOptions={places?.map((place) => {
+          return { label: place.name, value: place.slug }
+        })}
+        /* @ts-ignore */
+        categoriesOptions={places?.map((place) => {
+          return { label: place.name, value: place.slug }
+        })}
+      />
       <PlacePane
         data={{ id: '1', name: 'Ponto 1' }}
         isVisible={isPlacePaneOpen}
-        closePane={() => closePlacePane()}
+        closePane={() => {
+          closePopupFix()
+          closePlace()
+        }}
       />
       <MapContainer
         center={[mapCenter[0], mapCenter[1]]}
@@ -158,18 +242,27 @@ const Map = ({ places }: MapProps) => {
           }}
         </MapConsumer>
 
-        {places?.map(({ slug, name, resume, cordinates }) => {
+        {places?.map(({ slug, name, resume, cordinates }, index) => {
           const { latitude, longitude } = cordinates
 
           return (
             <Marker
+              // @ts-ignore
+              useRef={(element) => itemsEls.current.push(element)}
               key={`place-${slug}`}
               position={[latitude, longitude]}
               icon={iconMarker}
               eventHandlers={{
                 click: () => {
-                  onMarkerClick(cordinates)
-                  setIsPlacePaneOpen((old) => !old)
+                  onMarkerClick(slug)
+                },
+                // @ts-ignore
+                mouseOn: (e) => {
+                  e.target.classList.add('animation-none')
+                },
+                // @ts-ignore
+                mouseOut: (e) => {
+                  e.target.classList.remove('animation-none')
                 },
               }}
               aria-label={name}
@@ -182,30 +275,30 @@ const Map = ({ places }: MapProps) => {
                 ></img>
                 <div className="body">
                   <h2 className="name">{name}</h2>
-                  <p className="resume">
-                    Qual Amazônia você quer conhecer? Sua verde imensidão abriga
-                    ao mesmo tempo uma floresta, nove países, a maior
-                    biodiversidade do mundo em um ecossistema tropical, nove
-                    estados brasileiros e a maior população indígena do Brasil.
-                  </p>
-                  <span className="span">Clique para abrir</span>
+                  <p className="resume">{resume}</p>
+                  <span className="span">
+                    Clique para abrir <PlusIcon />
+                  </span>
                 </div>
               </Tooltip>
 
-              <Popup offset={[0, -180]} closeOnClick={false}>
+              <Popup offset={[0, -170]} closeOnClick={false}>
                 <img
                   alt="Aldeia Indigena Yanawá"
                   src="/img/indigenasyanawa.png"
                 ></img>
                 <div className="body">
                   <h2 className="name">{name}</h2>
-                  <p className="resume">
-                    Qual Amazônia você quer conhecer? Sua verde imensidão abriga
-                    ao mesmo tempo uma floresta, nove países, a maior
-                    biodiversidade do mundo em um ecossistema tropical, nove
-                    estados brasileiros e a maior população indígena do Brasil.
-                  </p>
-                  <span className="span">Clique para fechar</span>
+                  <p className="resume">{resume}</p>
+                  <span
+                    onClick={() => {
+                      closePopupFix()
+                      closePlace()
+                    }}
+                    className="span"
+                  >
+                    Clique para fechar <TimesIcon />
+                  </span>
                 </div>
               </Popup>
             </Marker>

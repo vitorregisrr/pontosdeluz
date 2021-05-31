@@ -6,6 +6,7 @@ import * as S from './styles'
 
 type Suggestion = {
   value: string
+  label: string
 }
 
 type ValueProps = {
@@ -18,13 +19,14 @@ type FormInputSearchProps = {
   placeholder?: string
   style?: string
   Icon?: StyledIcon
-  onChange?: () => void
+  sendValueHandler?: () => void
 }
 
 const FormInputSearch = ({
   placeholder = undefined,
   Icon,
   options,
+  sendValueHandler,
 }: FormInputSearchProps) => {
   const [currentValue, setCurrentValue] = useState('')
   const [currentOptions, setCurrentOptions] = useState(options)
@@ -44,28 +46,45 @@ const FormInputSearch = ({
     setCurrentValue(newValue)
   }
 
+  // @ts-ignore
+  const onSuggestionSelected = (event: () => void, { suggestion }) => {
+    // @ts-ignore
+    sendValueHandler(suggestion.value)
+  }
+
   // Teach Autosuggest how to calculate suggestions for any given input value.
   const getSuggestions = (value: string) => {
-    const inputValue = value.trim().toLowerCase().replace(/\s/g, '')
+    const inputValue = escapeRegExp(
+      value.trim().toLowerCase().replace(/\s/g, '')
+    )
     const inputLength = inputValue.length
 
     return inputLength === 0
       ? []
-      : options.filter(
-          (opt) =>
-            opt.value.toLowerCase().replace(/\s/g, '').search(inputValue) !== -1
-        )
+      : options.filter((opt) => {
+          const optValue = escapeRegExp(
+            opt.label.toLowerCase().replace(/\s/g, '')
+          )
+          return optValue.search(inputValue) !== -1
+        })
   }
 
   // When suggestion is clicked, Autosuggest needs to populate the input
   // based on the clicked suggestion. Teach Autosuggest how to calculate the
   // input value for every given suggestion.
-  const getSuggestionValue = (suggestion: Suggestion) => suggestion.value
+  const getSuggestionLabel = (suggestion: Suggestion) => suggestion.label
 
   // Use your imagination to render suggestions.
   const renderSuggestion = (suggestion: Suggestion) => (
-    <div>{suggestion.value}</div>
+    <div>{suggestion.label}</div>
   )
+
+  const escapeRegExp = (str: string) => {
+    if (typeof str !== 'string') {
+      return ''
+    }
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
+  }
 
   // Properties of input element
   const inputProps = {
@@ -81,8 +100,9 @@ const FormInputSearch = ({
         suggestions={currentOptions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
+        getSuggestionValue={getSuggestionLabel}
         renderSuggestion={renderSuggestion}
+        onSuggestionSelected={onSuggestionSelected}
         /* @ts-ignore */
         inputProps={inputProps}
       />

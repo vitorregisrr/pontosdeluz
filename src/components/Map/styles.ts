@@ -30,13 +30,13 @@ export const MapWrapper = styled.div`
   .leaflet-marker-pane {
     animation: float 6s infinite;
 
-    &:hover {
-      animation: none;
+    &.js-hovered {
+      animation: none !important;
     }
   }
 
   .leaflet-marker-icon {
-    position: relative;
+    position: absolute;
     background: none;
     border: none;
     background-image: url('/img/light-orb.png');
@@ -71,7 +71,6 @@ export const MapWrapper = styled.div`
     border-radius: 10px;
     box-shadow: none;
     border: 0px;
-    transition: opacity 0.4s, transform 0.1s;
 
     .leaflet-popup-close-button {
       display: none;
@@ -130,7 +129,14 @@ export const MapWrapper = styled.div`
 
       .span {
         font-size: 0.85rem;
+        cursor: pointer;
         color: rgba(0, 0, 0, 0.5);
+
+        svg {
+          width: 7px;
+          margin-left: 1px;
+          margin-bottom: 0px;
+        }
       }
     }
   }
@@ -194,6 +200,12 @@ export const MapWrapper = styled.div`
         .span {
           font-size: 0.85rem;
           color: rgba(0, 0, 0, 0.5);
+
+          svg {
+            width: 7px;
+            margin-left: 1px;
+            margin-bottom: 0px;
+          }
         }
       }
     }

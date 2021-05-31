@@ -5,10 +5,20 @@ import { Sparkles } from '@styled-icons/ionicons-outline'
 import * as S from './styles'
 
 type MapHeaderProps = {
-  zoomOutMap?: () => void
+  zoomOutMap: () => void
+  setMapPosition: () => void
+  openPlace: () => void
+  placesOptions: { value: string; label: string }[]
+  categoriesOptions: { value: string; label: string; color: string }[]
 }
 
-const MapHeader = ({ zoomOutMap = () => true }: MapHeaderProps) => {
+const MapHeader = ({
+  zoomOutMap,
+  setMapPosition,
+  openPlace,
+  placesOptions,
+  categoriesOptions,
+}: MapHeaderProps) => {
   return (
     <S.MapHeaderWrapper>
       <S.MapHeaderBrandWrapper
@@ -22,10 +32,14 @@ const MapHeader = ({ zoomOutMap = () => true }: MapHeaderProps) => {
       <S.MapHeaderFilters>
         <FormInputSearch
           Icon={Sparkles}
-          options={[{ value: 'Ponto 1' }]}
+          /* @ts-ignore */
+          sendValueHandler={(slug: string) => openPlace(slug)}
+          options={placesOptions}
           placeholder="Pesquisar um ponto pelo nome..."
         />
         <FormGoogleMaps
+          // @ts-ignore
+          onChange={(adress) => setMapPosition(adress)}
           Icon={Map}
           placeholder="Pesquisar um país, cidade, rua..."
         />
