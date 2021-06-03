@@ -10,7 +10,7 @@ export type PageTemplateProps = {
 
 const PageTemplate = ({ heading, body }: PageTemplateProps) => (
   <S.Content>
-    <LinkWrapper position="top" href="/">
+    <LinkWrapper href="/">
       <CloseOutline size={32} />
     </LinkWrapper>
 

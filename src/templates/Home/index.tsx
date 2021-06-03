@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
-import { InfoOutline } from '@styled-icons/evaicons-outline/InfoOutline'
-import LinkWrapper from 'components/LinkWrapper'
+import InfoLink from 'components/InfoLink'
 import { MapProps } from 'components/Map'
 import ProfileLink from 'components/ProfileLink'
 
@@ -9,9 +8,7 @@ const Map = dynamic(() => import('components/Map'), { ssr: false })
 export default function Home({ places }: MapProps) {
   return (
     <>
-      <LinkWrapper position="bottom" href="/about">
-        <InfoOutline size={32} aria-label="About" />
-      </LinkWrapper>
+      <InfoLink position="bottom" href="/about" />
       <ProfileLink />
       <Map places={places} />
     </>
