@@ -291,8 +291,11 @@ const Map = ({ places }: MapProps) => {
                 </Tooltip>
               ) : null}
 
-              <Popup offset={[0, -70]} closeOnClick={false}>
+              <Popup offset={[0, -180]} closeOnClick={false}>
+                <img alt="Aldeia Indigena Yanawá" src={gallery[0].url}></img>
                 <div className="body">
+                  <h2 className="name">{name}</h2>
+                  <p className="resume">{resume}</p>
                   <span
                     onClick={() => {
                       closePopupFix()

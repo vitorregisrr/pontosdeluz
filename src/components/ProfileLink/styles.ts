@@ -60,7 +60,7 @@ type DropdownProps = {
 
 export const Dropdown = styled.div`
   position: absolute;
-  bottom: -16px;
+  bottom: -12px;
   left: 0;
   display: flex;
   flex-direction: column;
@@ -83,7 +83,7 @@ export const Dropdown = styled.div`
     content: '';
     position: absolute;
     right: 12.8%;
-    top: 0;
+    top: 1px;
     width: 0;
     height: 0;
     border-left: 7px solid transparent;
@@ -93,6 +93,9 @@ export const Dropdown = styled.div`
   }
 
   hr {
+    background-color: rgba(0, 0, 0, 0.18);
+    height: 1px;
+    border: none;
   }
 `
 export const DropdownList = styled.ul`
@@ -110,11 +113,15 @@ export const DropdownItem = styled.li`
   font-size: 1.2rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
-  padding: 8px 14px;
+  padding: 10px 14px;
   transition: all 0.4s;
 
   &:hover {
     background-color: var(--highlight);
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   }
 
   span {
