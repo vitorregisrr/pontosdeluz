@@ -22,12 +22,16 @@
     ]
   },
   "dependencies": {
+    "@styled-icons/boxicons-regular": "^10.34.0",
+    "@styled-icons/boxicons-solid": "^10.34.0",
     "@styled-icons/entypo": "^10.18.0",
     "@styled-icons/evaicons-outline": "^10.18.0",
     "@styled-icons/fa-solid": "^10.32.0",
+    "@styled-icons/fluentui-system-regular": "^10.34.0",
     "@styled-icons/heroicons-solid": "^10.33.0",
-    "@styled-icons/ionicons-outline": "^10.28.0",
-    "@styled-icons/ionicons-solid": "^10.28.0",
+    "@styled-icons/ionicons-outline": "^10.34.0",
+    "@styled-icons/ionicons-solid": "^10.34.0",
+    "@styled-icons/material": "^10.34.0",
     "@styled-icons/typicons": "^10.18.0",
     "@types/chroma-js": "^2.1.3",
     "@types/react-autosuggest": "^10.1.4",

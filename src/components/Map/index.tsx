@@ -22,6 +22,12 @@ type Cordinates = {
   latitude: number
 }
 
+type ImageProps = {
+  url: string
+  height: number
+  width: number
+}
+
 type Place = {
   id: string
   name: string
@@ -32,6 +38,10 @@ type Place = {
   aboutText?: {
     html: string
     text: string
+  }
+  gallery: ImageProps[]
+  image?: {
+    url: string
   }
   tags?: [string]
   cordinates: Cordinates
@@ -242,7 +252,7 @@ const Map = ({ places }: MapProps) => {
           }}
         </MapConsumer>
 
-        {places?.map(({ slug, name, resume, cordinates }, index) => {
+        {places?.map(({ slug, name, resume, cordinates, gallery }, index) => {
           const { latitude, longitude } = cordinates
 
           return (
@@ -268,28 +278,21 @@ const Map = ({ places }: MapProps) => {
               aria-label={name}
             >
               {/* @ts-ignore */}
-              <Tooltip offset={[14, -29]}>
-                <img
-                  alt="Aldeia Indigena Yanawá"
-                  src="/img/indigenasyanawa.png"
-                ></img>
-                <div className="body">
-                  <h2 className="name">{name}</h2>
-                  <p className="resume">{resume}</p>
-                  <span className="span">
-                    Clique para abrir <PlusIcon />
-                  </span>
-                </div>
-              </Tooltip>
+              {currentSlug !== slug ? (
+                <Tooltip offset={[14, -29]}>
+                  <img alt="Aldeia Indigena Yanawá" src={gallery[0].url}></img>
+                  <div className="body">
+                    <h2 className="name">{name}</h2>
+                    <p className="resume">{resume}</p>
+                    <span className="span">
+                      Clique para abrir <PlusIcon />
+                    </span>
+                  </div>
+                </Tooltip>
+              ) : null}
 
-              <Popup offset={[0, -170]} closeOnClick={false}>
-                <img
-                  alt="Aldeia Indigena Yanawá"
-                  src="/img/indigenasyanawa.png"
-                ></img>
+              <Popup offset={[0, -70]} closeOnClick={false}>
                 <div className="body">
-                  <h2 className="name">{name}</h2>
-                  <p className="resume">{resume}</p>
                   <span
                     onClick={() => {
                       closePopupFix()

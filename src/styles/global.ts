@@ -12,18 +12,21 @@ const GlobalStyles = createGlobalStyle`
     --large: 5rem;
 
   }
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
   }
+
   html {
     font-size: 62.5%;
   }
+
   html, body, #__next {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     overflow: hidden;
     background: var(--background);
     color: var(--white);

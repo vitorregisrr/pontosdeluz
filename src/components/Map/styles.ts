@@ -266,8 +266,6 @@ export const MapWrapper = styled.div`
   }
 
   &.isPlacePaneOpen {
-    .leaflet-tooltip {
-      display: none !important;
-    }
+    //...
   }
 `
