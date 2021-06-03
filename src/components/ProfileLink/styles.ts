@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
     transform: scale(1);
     top: calc(var(--medium) - 10px);
-    right: calc(var(--medium) + 30px);
+    right: calc(var(--medium) - 5px);
   }
 `
 
@@ -66,7 +66,7 @@ export const Dropdown = styled.div`
   flex-direction: column;
   background-color: rgba(250, 250, 250, 0.92);
   border-radius: 14px;
-  transform: translate(-44.5%, 100%);
+  transform: translate(-68.5%, 100%);
   pointer-events: none;
   opacity: 0;
   transition: all 0.3s;
@@ -82,7 +82,7 @@ export const Dropdown = styled.div`
   &::before {
     content: '';
     position: absolute;
-    right: 36.8%;
+    right: 12.8%;
     top: 0;
     width: 0;
     height: 0;
@@ -104,6 +104,7 @@ export const DropdownList = styled.ul`
 `
 
 export const DropdownItem = styled.li`
+  position: relative;
   display: flex;
   align-items: center;
   font-size: 1.2rem;
@@ -124,6 +125,16 @@ export const DropdownItem = styled.li`
   svg {
     width: 15px;
     margin-right: 5px;
+  }
+
+  .sub-icon {
+    opacity: 0.3;
+  }
+
+  .plus-icon {
+    position: absolute;
+    width: 15px;
+    transform: translate(4px, 6px);
   }
 `
 

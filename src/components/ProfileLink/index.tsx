@@ -4,11 +4,15 @@ import {
   MailSend as InviteIcon,
   HeartCircle as HeartIcon,
 } from '@styled-icons/boxicons-regular'
+import { MapAlt as MapIcon } from '@styled-icons/boxicons-regular/MapAlt'
 import {
   ExitToApp as ExitIcon,
   PersonOutline as PersonIcon,
 } from '@styled-icons/material'
-import { Cog as CogIcon } from '@styled-icons/heroicons-outline'
+import {
+  Cog as CogIcon,
+  PlusSm as PlusIcon,
+} from '@styled-icons/heroicons-outline'
 
 import * as S from './styles'
 
@@ -30,8 +34,18 @@ const ProfileLink = () => {
               <Link href="/">
                 <>
                   {' '}
+                  <MapIcon class="sub-icon" />
+                  <PlusIcon className="plus-icon" />
+                  <span>Criar um mapa</span>
+                </>
+              </Link>
+            </S.DropdownItem>
+            <S.DropdownItem>
+              <Link href="/">
+                <>
+                  {' '}
                   <HeartIcon />
-                  <span>Pontos Favoritos</span>
+                  <span>Meus favoritos</span>
                 </>
               </Link>
             </S.DropdownItem>
@@ -64,7 +78,7 @@ const ProfileLink = () => {
               <Link href="/">
                 <>
                   <ExitIcon />
-                  <span>Sair</span>
+                  <span>Sair da conta</span>
                 </>
               </Link>
             </S.DropdownItem>
