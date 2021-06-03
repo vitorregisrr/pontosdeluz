@@ -34,7 +34,7 @@ const ProfileLink = () => {
               <Link href="/">
                 <>
                   {' '}
-                  <MapIcon class="sub-icon" />
+                  <MapIcon className="sub-icon" />
                   <PlusIcon className="plus-icon" />
                   <span>Criar um mapa</span>
                 </>
