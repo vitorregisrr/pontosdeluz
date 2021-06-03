@@ -1,4 +1,4 @@
-import Analytics from 'components/Analytics'
+import Analytics from 'components/External/Analytics'
 import Document, {
   Html,
   Head,

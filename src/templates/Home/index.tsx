@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import InfoLink from 'components/InfoLink'
 import { MapProps } from 'components/Map'
-import ProfileLink from 'components/ProfileLink'
+import ProfileLink from 'components/ProfileMenu'
 
 const Map = dynamic(() => import('components/Map'), { ssr: false })
 

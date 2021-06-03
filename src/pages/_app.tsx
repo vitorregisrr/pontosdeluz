@@ -6,7 +6,7 @@ import { DefaultSeo } from 'next-seo'
 import SEO from '../../next-seo.config'
 
 import GlobalStyles from 'styles/global'
-import { FontsLoader } from '../components/Fonts'
+import { FontsLoader } from '../components/External/Fonts'
 
 function App({ Component, pageProps }: AppProps) {
   return (

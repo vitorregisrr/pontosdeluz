@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import LinkWrapper from 'components/LinkWrapper'
+import LinkWrapper from 'components/UI/LinkWrapper'
 import { CloseOutline } from '@styled-icons/evaicons-outline/CloseOutline'
 
 import * as S from './styles'

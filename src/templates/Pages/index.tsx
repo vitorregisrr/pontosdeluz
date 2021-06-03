@@ -1,5 +1,5 @@
 import { CloseOutline } from '@styled-icons/evaicons-outline/CloseOutline'
-import LinkWrapper from 'components/LinkWrapper'
+import LinkWrapper from 'components/UI/LinkWrapper'
 
 import * as S from './styles'
 
