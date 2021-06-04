@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { CSSTransition } from 'react-transition-group'
 
 import * as S from './styles'
 import ProfileMenu from './ProfileMenu'
@@ -51,10 +52,14 @@ const UserMenu = () => {
           toggleActive={onProfileMenuClickHandler}
         />
       </S.UserMenuWrapper>
-      <S.UserMenuBackdrop
-        isVisible={isProfileMenuActive || isNotifyMenuActive || isAddMenuActive}
-        onClick={() => onBackdropClickHandler()}
-      />
+      <CSSTransition
+        in={isProfileMenuActive || isNotifyMenuActive || isAddMenuActive}
+        timeout={300}
+        classNames="CSSTransition-backdrop"
+        unmountOnExit
+      >
+        <S.UserMenuBackdrop onClick={() => onBackdropClickHandler()} />
+      </CSSTransition>
     </>
   )
 }

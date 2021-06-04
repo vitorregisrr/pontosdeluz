@@ -5,21 +5,24 @@ export const MapWrapper = styled.div`
   height: 100%;
 
   .leaflet-container {
-    background-color: #030518;
+    background-color: black;
+    z-index: 4;
 
     &::after {
       content: '';
       position: absolute;
+      z-index: 1;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #030518;
+      background-color: black;
       background-image: url('/img/star-bg2.gif');
       background-repeat: repeat;
       background-size: cover;
       background-blend-mode: lighten;
-      opacity: 0.25;
+      opacity: 0.24;
+      pointer-events: none;
     }
   }
 

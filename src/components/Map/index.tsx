@@ -222,7 +222,7 @@ const Map = ({ places }: MapProps) => {
         zoom={mapZoom}
         minZoom={3}
         maxBounds={[
-          [-180, 180],
+          [-80, 220],
           [180, -180],
         ]}
         // @ts-ignore

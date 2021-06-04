@@ -94,31 +94,16 @@ export const NotifyButton = styled.button`
   }
 `
 
-type NotifyDropdownProps = {
-  isVisible: boolean
-}
-
 export const NotifyDropdown = styled.div`
   position: absolute;
   bottom: -18px;
   left: 0;
   display: flex;
   flex-direction: column;
+  width: 340px;
   background-color: rgba(250, 250, 250, 0.92);
   border-radius: 14px;
   transform: translate(-75.5%, 100%);
-  pointer-events: none;
-  width: 340px;
-  opacity: 0;
-  transition: all 0.3s;
-
-  ${(props: NotifyDropdownProps) =>
-    props.isVisible
-      ? `
-    opacity: 1;
-    pointer-events: all;
-  `
-      : null}
 
   &::before {
     content: '';
@@ -139,13 +124,17 @@ export const NotifyDropdown = styled.div`
     border: none;
   }
 `
-export const NotifyDropdownList = styled.ul`
+export const NotifyDropdownList = styled.div`
   position: relative;
   width: 100%;
   height: 60vh;
   border-radius: 15px;
-  padding: 5px 0;
+  padding: 0;
   overflow: hidden;
+
+  .simplebar-offset {
+    width: 100%;
+  }
 
   .simplebar-track.simplebar-vertical {
     right: 5px;
@@ -160,6 +149,7 @@ export const NotifyDropdownList = styled.ul`
 export const NotifyDropdownItem = styled.li`
   position: relative;
   display: flex;
+  width: 100%;
   align-items: center;
   font-size: 1.2rem;
   font-weight: 500;

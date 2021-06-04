@@ -10,14 +10,9 @@ export const PlacePaneWrapper = styled.div`
   right: 40px;
   z-index: 800;
   opacity: 1;
-  transition: all 0.3s ease-in;
 
   ${(props: PlacePaneWrapperProps) => `
-      ${
-        !props.isVisible
-          ? 'pointer-events: none; opacity: 0; transform: translateX(300px); .close-button{transform: translateY(50px)}'
-          : ''
-      }
+      ${!props.isVisible ? '.close-button{transform: translateY(50px)}' : ''}
   `}
 `
 
@@ -48,7 +43,13 @@ export const PlacePaneImg = styled.img`
 export const PlacePaneBody = styled.div`
   position: relative;
   height: 60%;
+  width: 100%;
   padding: 10px 35px 10px 18px;
+  overflow: hidden;
+
+  .simplebar-offset {
+    width: 100%;
+  }
 
   .simplebar-track.simplebar-vertical {
     right: -26px;

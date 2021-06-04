@@ -15,10 +15,6 @@ export const UserMenuWrapper = styled.div`
   }
 `
 
-type BackdropProps = {
-  onClick: () => void
-  isVisible: boolean
-}
 export const UserMenuBackdrop = styled.div`
   position: absolute;
   left: 0;
@@ -26,16 +22,7 @@ export const UserMenuBackdrop = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #000;
+  opacity: 0.4;
   z-index: 1300;
-  pointer-events: none;
-  transition: all 0.3s;
-  opacity: 0;
   cursor: pointer;
-
-  ${(props: BackdropProps) =>
-    props.isVisible
-      ? `
-      opacity: 0.5;
-      pointer-events: all;`
-      : null}
 `
