@@ -165,13 +165,13 @@ const Map = ({ places }: MapProps) => {
 
   const setMapPosition = (adress: AdressProps) => {
     closePlace()
-
+    console.log(adress)
     if (adress.geometry.bounds) {
       const bounds = adress.geometry.bounds
       // @ts-ignore
       map.flyToBounds([
-        [bounds.Ua.g, bounds.La.g],
-        [bounds.Ua.i, bounds.La.i],
+        [bounds.oc.g, bounds.Eb.g],
+        [bounds.oc.i, bounds.Eb.i],
       ])
     } else if (adress.geometry.location) {
       console.log()

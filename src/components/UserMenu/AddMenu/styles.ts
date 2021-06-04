@@ -1,66 +1,59 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  position: fixed;
-  z-index: 1400; // bigger than leaflet
-  top: calc(var(--medium) - 10px);
-  right: calc(var(--medium) - 10px);
-  color: var(--white);
+  position: relative;
   cursor: pointer;
-
-  @media screen and (min-width: 768px) {
-    transform: scale(1);
-    top: calc(var(--medium) - 10px);
-    right: calc(var(--medium) - 5px);
-  }
+  margin-right: 0.3rem;
 `
 
-type ProfileButtonProps = {
+type AddMenuButtonProps = {
   onClick: () => void
   isActive: boolean
 }
 
-export const ProfileButton = styled.button`
-  width: 50px;
-  height: 50px;
+export const AddMenuButton = styled.button`
+  position: relative;
+  width: 53px;
+  height: 53px;
   background: none;
-  border: 3.4px solid #fff;
+  color: #fff;
+  border: none;
   border-radius: 50%;
   opacity: 0.9;
-  overflow: hidden;
   cursor: pointer;
   transition: all 0.4s;
 
-  ${(props: ProfileButtonProps) =>
+  ${(props: AddMenuButtonProps) =>
     props.isActive
       ? `
-        border-color: var(--highlight);
-        opacity: 1;
+      color: var(--highlight);
+        opacity: .8;
         transform: scale(1.06);
+
+        .number{
+          opacity: 0;
+        }
       `
       : null}
 
   &:hover {
-    border-color: var(--highlight);
+    color: var(--highlight);
     opacity: 1;
     transform: scale(1.06);
+
+    .number {
+      opacity: 0;
+    }
   }
 `
 
-export const ImageIcon = styled.img`
-  width: 104%;
-  height: 104%;
-  object-fit: cover;
-  object-position: center center;
-`
-
-type DropdownProps = {
+type AddMenuDropdownProps = {
   isVisible: boolean
 }
 
-export const Dropdown = styled.div`
+export const AddMenuDropdown = styled.div`
   position: absolute;
-  bottom: -12px;
+  bottom: -7.6px;
   left: 0;
   display: flex;
   flex-direction: column;
@@ -71,18 +64,18 @@ export const Dropdown = styled.div`
   opacity: 0;
   transition: all 0.3s;
 
-  ${(props: DropdownProps) =>
+  ${(props: AddMenuDropdownProps) =>
     props.isVisible
       ? `
-    opacity: 1;
-    pointer-events: all;
-  `
+      opacity: 1;
+      pointer-events: all;
+    `
       : null}
 
   &::before {
     content: '';
     position: absolute;
-    right: 12.8%;
+    right: 19.2%;
     top: 1px;
     width: 0;
     height: 0;
@@ -98,7 +91,7 @@ export const Dropdown = styled.div`
     border: none;
   }
 `
-export const DropdownList = styled.ul`
+export const AddMenuDropdownList = styled.ul`
   width: 100%;
   height: 100%;
   border-radius: 15px;
@@ -106,11 +99,11 @@ export const DropdownList = styled.ul`
   overflow: hidden;
 `
 
-export const DropdownItem = styled.li`
+export const AddMenuDropdownItem = styled.li`
   position: relative;
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
   padding: 10px 14px;
@@ -130,7 +123,7 @@ export const DropdownItem = styled.li`
   }
 
   svg {
-    width: 15px;
+    width: 17px;
     margin-right: 5px;
   }
 
@@ -143,29 +136,4 @@ export const DropdownItem = styled.li`
     width: 15px;
     transform: translate(4px, 6px);
   }
-`
-
-type BackdropProps = {
-  onClick: () => void
-  isVisible: boolean
-}
-export const Backdrop = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  z-index: 1300;
-  pointer-events: none;
-  transition: all 0.3s;
-  opacity: 0;
-  cursor: pointer;
-
-  ${(props: BackdropProps) =>
-    props.isVisible
-      ? `
-      opacity: 0.5;
-      pointer-events: all;`
-      : null}
 `

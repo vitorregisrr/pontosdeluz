@@ -4,7 +4,6 @@ import {
   MailSend as InviteIcon,
   HeartCircle as HeartIcon,
 } from '@styled-icons/boxicons-regular'
-import { MapAlt as MapIcon } from '@styled-icons/boxicons-regular/MapAlt'
 import {
   ExitToApp as ExitIcon,
   PersonOutline as PersonIcon,
@@ -16,31 +15,30 @@ import {
 
 import * as S from './styles'
 
-const ProfileLink = () => {
-  const [isVisible, setIsVisible] = useState(false)
+type ProfileMenuProps = {
+  isActive: boolean
+  toggleActive: () => void
+}
 
+const ProfileMenu = ({ isActive = false, toggleActive }: ProfileMenuProps) => {
   return (
     <>
       <S.Wrapper>
-        <S.ProfileButton
-          onClick={() => setIsVisible((old) => !old)}
-          isActive={isVisible}
-        >
+        <S.ProfileButton onClick={() => toggleActive()} isActive={isActive}>
           <S.ImageIcon src={'/img/profile-thumb.jpg'} />
         </S.ProfileButton>
-        <S.Dropdown isVisible={isVisible}>
-          <S.DropdownList>
-            <S.DropdownItem>
+        <S.ProfileDropdown isVisible={isActive}>
+          <S.ProfileDropdownList>
+            <S.ProfileDropdownItem>
               <Link href="/">
                 <>
                   {' '}
-                  <MapIcon className="sub-icon" />
-                  <PlusIcon className="plus-icon" />
-                  <span>Criar um mapa</span>
+                  <PersonIcon />
+                  <span>Meu perfil</span>
                 </>
               </Link>
-            </S.DropdownItem>
-            <S.DropdownItem>
+            </S.ProfileDropdownItem>
+            <S.ProfileDropdownItem>
               <Link href="/">
                 <>
                   {' '}
@@ -48,46 +46,45 @@ const ProfileLink = () => {
                   <span>Meus favoritos</span>
                 </>
               </Link>
-            </S.DropdownItem>
-            <S.DropdownItem>
+            </S.ProfileDropdownItem>
+            <S.ProfileDropdownItem>
               <Link href="/">
                 <>
                   <InviteIcon />
                   <span>Códigos de convite</span>
                 </>
               </Link>
-            </S.DropdownItem>
+            </S.ProfileDropdownItem>
             <hr />
-            <S.DropdownItem>
+            <S.ProfileDropdownItem>
               <Link href="/">
                 <>
                   <PersonIcon />
                   <span>Minha conta</span>
                 </>
               </Link>
-            </S.DropdownItem>
-            <S.DropdownItem>
+            </S.ProfileDropdownItem>
+            <S.ProfileDropdownItem>
               <Link href="/">
                 <>
                   <CogIcon />
                   <span>Configurações</span>
                 </>
               </Link>
-            </S.DropdownItem>
-            <S.DropdownItem>
+            </S.ProfileDropdownItem>
+            <S.ProfileDropdownItem>
               <Link href="/">
                 <>
                   <ExitIcon />
                   <span>Sair da conta</span>
                 </>
               </Link>
-            </S.DropdownItem>
-          </S.DropdownList>
-        </S.Dropdown>
+            </S.ProfileDropdownItem>
+          </S.ProfileDropdownList>
+        </S.ProfileDropdown>
       </S.Wrapper>
-      <S.Backdrop isVisible={isVisible} onClick={() => setIsVisible(false)} />
     </>
   )
 }
 
-export default ProfileLink
+export default ProfileMenu
