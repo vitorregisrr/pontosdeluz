@@ -140,11 +140,21 @@ export const NotifyDropdown = styled.div`
   }
 `
 export const NotifyDropdownList = styled.ul`
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: 60vh;
   border-radius: 15px;
   padding: 5px 0;
   overflow: hidden;
+
+  .simplebar-track.simplebar-vertical {
+    right: 5px;
+    opacity: 0.6;
+
+    &::before {
+      width: 4px;
+    }
+  }
 `
 
 export const NotifyDropdownItem = styled.li`
