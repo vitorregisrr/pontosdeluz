@@ -55,7 +55,7 @@ const UserMenu = () => {
       <CSSTransition
         in={isProfileMenuActive || isNotifyMenuActive || isAddMenuActive}
         timeout={300}
-        classNames="CSSTransition-backdrop"
+        classNames="CSSTransition-backdropp"
         unmountOnExit
       >
         <S.UserMenuBackdrop onClick={() => onBackdropClickHandler()} />

@@ -88,17 +88,17 @@ const GlobalStyles = createGlobalStyle`
 }
 
 /* backdrop */
-.CSSTransition-backdrop-enter {
+.CSSTransition-backdropp-enter {
   opacity: 0;
 }
-.CSSTransition-backdrop-enter-active {
+.CSSTransition-backdropp-enter-active {
   opacity: .4;
   transition: opacity 200ms;
 }
-.CSSTransition-backdrop-exit {
+.CSSTransition-backdropp-exit {
   opacity: .4;
 }
-.CSSTransition-backdrop-exit-active {
+.CSSTransition-backdropp-exit-active {
   opacity: 0;
   transition: opacity 200ms;
 }
