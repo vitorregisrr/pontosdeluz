@@ -77,14 +77,14 @@ const GlobalStyles = createGlobalStyle`
 }
 .CSSTransition-fade-enter-active {
   opacity: 1;
-  transition: opacity 200ms;
+  transition: all 200ms;
 }
 .CSSTransition-fade-exit {
   opacity: 1;
 }
 .CSSTransition-fade-exit-active {
   opacity: 0;
-  transition: opacity 200ms;
+  transition: all 200ms;
 }
 
 /* backdrop */
@@ -93,34 +93,57 @@ const GlobalStyles = createGlobalStyle`
 }
 .CSSTransition-backdropp-enter-active {
   opacity: .4;
-  transition: opacity 200ms;
+  transition: all 200ms;
 }
 .CSSTransition-backdropp-exit {
   opacity: .4;
 }
 .CSSTransition-backdropp-exit-active {
   opacity: 0;
-  transition: opacity 200ms;
+  transition: all 200ms;
 }
 
-/* fadeRight */
-.CSSTransition-fadeRight-enter {
-  transform: translateX(300px);
-  opacity: 0;
+/* placepane */
+@media screen and (max-width: 768px){
+  .CSSTransition-placepane-enter {
+    transform: scale(0);
+    opacity: 0;
+  }
+  .CSSTransition-placepane-enter-active {
+    opacity: 1;
+    transform:  scale(1);
+    transition: all 400ms;
+  }
+  .CSSTransition-placepane-exit {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .CSSTransition-placepane-exit-active {
+    opacity: 0;
+    transform:  scale(0);
+    transition: all 400ms;
+  }
 }
-.CSSTransition-fadeRight-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: transform 400ms, opacity 400ms;
-}
-.CSSTransition-fadeRight-exit {
-  opacity: 1;
-  transform: translateX(0);
-}
-.CSSTransition-fadeRight-exit-active {
-  opacity: 0;
-  transform: translateX(300px);
-  transition: transform 400ms, opacity 400ms;
+
+@media screen and (min-width: 768px){
+  .CSSTransition-placepane-enter {
+    transform: translateX(300px);
+    opacity: 0;
+  }
+  .CSSTransition-placepane-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 400ms;
+  }
+  .CSSTransition-placepane-exit {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .CSSTransition-placepane-exit-active {
+    opacity: 0;
+    transform: translateX(300px);
+    transition: all 400ms;
+  }
 }
 `
 

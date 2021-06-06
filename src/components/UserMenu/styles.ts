@@ -5,8 +5,8 @@ export const UserMenuWrapper = styled.div`
   z-index: 1400; // bigger than leaflet
   display: flex;
   align-items: center;
-  top: calc(var(--medium) - 10px);
-  right: calc(var(--medium) - 10px);
+  top: calc(var(--medium) - 12px);
+  right: calc(var(--medium) - 14px);
 
   @media screen and (min-width: 768px) {
     transform: scale(1);

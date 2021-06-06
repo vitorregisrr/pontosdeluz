@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { FormInputSearch, FormSelect, FormGoogleMaps } from 'components/UI/'
 import { Map } from '@styled-icons/entypo'
-import { Sparkles } from '@styled-icons/ionicons-outline'
+import { Sparkles as SparklesIcon } from '@styled-icons/ionicons-outline'
+import { FilterAlt as FilterIcon } from '@styled-icons/boxicons-regular'
+import { Times as TimesIcon } from '@styled-icons/fa-solid'
 
 import * as S from './styles'
 
@@ -19,6 +22,13 @@ const MapHeader = ({
   placesOptions,
   categoriesOptions,
 }: MapHeaderProps) => {
+  // Mobile visibility
+  const [isActive, setIsActive] = useState(false)
+
+  const onToggleButtonClickHandler = () => {
+    setIsActive((old) => !old)
+  }
+
   return (
     <S.MapHeaderWrapper>
       <S.MapHeaderBrandWrapper
@@ -29,9 +39,16 @@ const MapHeader = ({
         <S.MapHeaderBrand src={'/img/brand.png'} />
       </S.MapHeaderBrandWrapper>
 
-      <S.MapHeaderFilters>
+      <S.MapHeaderFilters isActive={isActive}>
+        <S.MapHeaderFilterToggler
+          type="button"
+          onClick={() => onToggleButtonClickHandler()}
+          isActive={isActive}
+        >
+          {isActive ? <TimesIcon className="times-icon" /> : <FilterIcon />}
+        </S.MapHeaderFilterToggler>
         <FormInputSearch
-          Icon={Sparkles}
+          Icon={SparklesIcon}
           /* @ts-ignore */
           sendValueHandler={(slug: string) => openPlace(slug)}
           options={placesOptions}

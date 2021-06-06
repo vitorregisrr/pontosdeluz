@@ -11,8 +11,8 @@ type ProfileButtonProps = {
 }
 
 export const ProfileButton = styled.button`
-  width: 55px;
-  height: 55px;
+  width: 49px;
+  height: 49px;
   background: none;
   border: 3.4px solid #fff;
   border-radius: 50%;
@@ -20,6 +20,11 @@ export const ProfileButton = styled.button`
   overflow: hidden;
   cursor: pointer;
   transition: all 0.4s;
+
+  @media screen and (min-width: 768px) {
+    width: 55px;
+    height: 55px;
+  }
 
   ${(props: ProfileButtonProps) =>
     props.isActive

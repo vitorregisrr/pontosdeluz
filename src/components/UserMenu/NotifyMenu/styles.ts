@@ -3,7 +3,11 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   position: relative;
   cursor: pointer;
-  margin-right: 1.4rem;
+  margin-right: 1.2rem;
+
+  @media screen and (min-width: 768px) {
+    margin-right: 1.4rem;
+  }
 `
 
 type NotifyButtonProps = {
@@ -13,8 +17,8 @@ type NotifyButtonProps = {
 
 export const NotifyButton = styled.button`
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 33px;
+  height: 33px;
   background: none;
   color: #fff;
   border: none;
@@ -22,6 +26,11 @@ export const NotifyButton = styled.button`
   opacity: 0.9;
   cursor: pointer;
   transition: all 0.4s;
+
+  @media screen and (min-width: 768px) {
+    width: 36px;
+    height: 36px;
+  }
 
   ${(props: NotifyButtonProps) =>
     props.isActive

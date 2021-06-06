@@ -2,7 +2,7 @@ import SimpleBar from 'simplebar-react'
 import { CSSTransition } from 'react-transition-group'
 
 import { Share as ShareIcon } from '@styled-icons/remix-line'
-import { ArrowRight as ArrowRightIcon } from '@styled-icons/typicons'
+import { ReadMore as ReadMoreIcon } from '@styled-icons/material-rounded'
 import { Times as TimesIcon } from '@styled-icons/fa-solid/Times'
 import Link from 'next/link'
 
@@ -27,7 +27,7 @@ const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
     <CSSTransition
       in={isVisible}
       timeout={500}
-      classNames="CSSTransition-fadeRight"
+      classNames="CSSTransition-placepane"
       unmountOnExit
     >
       <S.PlacePaneWrapper isVisible={isVisible}>
@@ -153,7 +153,7 @@ const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
             <S.PlacePaneMoreLinkWrapper>
               <Link href="/">
                 <>
-                  Ler mais <ArrowRightIcon />
+                  Acessar página completa <ReadMoreIcon />
                 </>
               </Link>
             </S.PlacePaneMoreLinkWrapper>

@@ -6,24 +6,36 @@ type PlacePaneWrapperProps = {
 
 export const PlacePaneWrapper = styled.div`
   position: absolute;
-  top: 17.6%;
-  right: 40px;
+  top: 18.6%;
+  right: 10px;
   z-index: 800;
   opacity: 1;
 
   ${(props: PlacePaneWrapperProps) => `
       ${!props.isVisible ? '.close-button{transform: translateY(50px)}' : ''}
   `}
+
+  @media screen and (min-width: 768px) {
+    top: 17.6%;
+    right: 40px;
+  }
 `
 
 export const PlacePanePane = styled.div`
   position: relative;
-  width: 390px;
   height: 70vh;
+  width: 94vw;
+  max-height: 580px;
   border-radius: 18px;
   background-color: #fff;
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
-  opacity: 0.9;
+  opacity: 0.96;
+
+  @media screen and (min-width: 768px) {
+    opacity: 0.9;
+    width: 390px;
+    height: 70vh;
+  }
 `
 
 export const PlacePaneImgWrapper = styled.div`
@@ -70,6 +82,7 @@ export const PlacePaneTagList = styled.ul`
     font-weight: 500;
     color: rgba(0, 0, 0, 0.5);
     margin-right: 3px;
+    white-space: nowrap;
   }
 `
 
@@ -80,10 +93,12 @@ type PlacePaneTagProps = {
 export const PlacePaneTag = styled.li`
   font-size: 0.9rem;
   letter-spacing: 0.3px;
-  display: inline-block;
   border-radius: 10px;
   background-color: ${(props: PlacePaneTagProps) => props.bgc || '#627fcf'};
   padding: 3px 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   &:not(:first-child) {
     margin-left: 4px;
@@ -106,7 +121,7 @@ export const PlacePaneDescription = styled.div`
 
   h4 {
     font-size: 1.3rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.6);
     margin-top: 7px;
   }
 
@@ -119,12 +134,12 @@ export const PlacePaneDescription = styled.div`
     li {
       margin-right: 10px;
       font-weight: 400;
-      color: rgba(0, 0, 0, 0.4);
+      color: rgba(0, 0, 0, 0.6);
 
       a {
         font-size: inherit;
         font-weight: 500;
-        color: rgba(0, 0, 0, 0.5);
+        color: rgba(0, 0, 0, 0.7);
         padding-right: 5px;
       }
     }
@@ -143,6 +158,7 @@ export const PlacePaneFooter = styled.footer`
 export const PlacePaneShareWrapper = styled.div``
 
 export const PlacePaneShareButton = styled.button`
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   background: none;
@@ -151,6 +167,10 @@ export const PlacePaneShareButton = styled.button`
   text-transform: lowercase;
   cursor: pointer;
   transition: all 0.4s;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.4rem;
+  }
 
   &:hover {
     transform: scale(1.05);
@@ -162,9 +182,13 @@ export const PlacePaneShareButton = styled.button`
   }
 
   svg {
-    width: 25px;
+    width: 23.4px;
     margin-right: 3px;
     margin-top: 2px;
+
+    @media screen and (min-width: 768px) {
+      width: 25px;
+    }
   }
 `
 export const PlacePaneShareMenu = styled.div``
@@ -173,21 +197,29 @@ export const PlacePaneMoreLinkWrapper = styled.div`
   display: flex;
   align-items: center;
   height: 2.9rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   padding: 5px 15px;
-  color: #fff;
   word-wrap: nowrap;
   cursor: pointer;
-  background-color: #0f0324;
+  background-color: var(--highlight);
+  color: #0f0324;
   border-radius: 14px;
-  transition: all 0.4s;
+  font-weight: 500;
+  transition: all 0.3s;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.24rem;
+  }
 
   svg {
     width: 20px;
     height: 20px;
+    margin-left: 4px;
   }
 
   &:hover {
+    background-color: #0f0324;
+    color: #fff;
     transform: scale(1.05);
   }
 `

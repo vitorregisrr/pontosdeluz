@@ -5,6 +5,10 @@ export const FormInputSearchWrapper = styled.div`
   width: 100%;
   transition: all 0.4s;
 
+  &:hover {
+    transform: scale(1.03);
+  }
+
   .icon {
     position: absolute;
     top: 11px;
@@ -13,24 +17,30 @@ export const FormInputSearchWrapper = styled.div`
     color: rgba(6, 2, 43, 0.5);
   }
 
-  &:hover {
-    transform: scale(1.05);
-  }
-
   .react-autosuggest__input {
     font-size: 13px;
     width: 100%;
     height: 35px;
     padding-left: 20px;
+    padding-right: 30px;
     border: none;
     border-radius: 16px;
     color: rgba(0, 0, 0, 0.5);
     box-shadow: 3px 4px 15px rgba(0, 0, 0, 0.15);
-    opacity: 0.84;
-    transition: all 0.4s;
+    opacity: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: all 0.3s;
+
+    @media screen and (min-width: 768px) {
+      opacity: 0.84;
+    }
 
     &:focus,
     &:active {
+      color: rgba(0, 0, 0, 0.7);
+      opacity: 0.94;
       outline: none;
     }
   }
@@ -40,13 +50,17 @@ export const FormInputSearchWrapper = styled.div`
     bottom: -5px;
     left: 50%;
     transform: translate(-50%, 100%);
-    opacity: 0.94;
+    opacity: 1;
     padding: 3px 0;
     border-radius: 16px;
     background-color: rgba(250, 250, 250, 0.95);
     overflow: hidden;
     width: 100%;
     transition: all 0.3s;
+
+    @media screen and (min-width: 768px) {
+      opacity: 0.94;
+    }
 
     &:not(.react-autosuggest__suggestions-container--open) {
       opacity: 0;

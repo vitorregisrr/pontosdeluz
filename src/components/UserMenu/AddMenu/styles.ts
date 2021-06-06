@@ -3,7 +3,11 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   position: relative;
   cursor: pointer;
-  margin-right: 0.3rem;
+  margin-right: 0.2rem;
+
+  @media screen and (min-width: 768px) {
+    margin-right: 0.3rem;
+  }
 `
 
 type AddMenuButtonProps = {
@@ -13,15 +17,20 @@ type AddMenuButtonProps = {
 
 export const AddMenuButton = styled.button`
   position: relative;
-  width: 53px;
-  height: 53px;
+  width: 42px;
+  height: 42px;
   background: none;
   color: #fff;
   border: none;
   border-radius: 50%;
   opacity: 0.9;
   cursor: pointer;
-  transition: all 0.4s;
+  transition: all 0.3s;
+
+  @media screen and (min-width: 768px) {
+    width: 54px;
+    height: 54px;
+  }
 
   ${(props: AddMenuButtonProps) =>
     props.isActive
@@ -60,7 +69,7 @@ export const AddMenuDropdown = styled.div`
   &::before {
     content: '';
     position: absolute;
-    right: 19.2%;
+    right: 21.4%;
     top: 1px;
     width: 0;
     height: 0;
@@ -68,6 +77,10 @@ export const AddMenuDropdown = styled.div`
     border-right: 7px solid transparent;
     border-bottom: 7px solid rgba(250, 250, 250, 0.92);
     transform: translateY(-100%);
+
+    @media screen and (min-width: 768px) {
+      right: 19.2%;
+    }
   }
 
   hr {
