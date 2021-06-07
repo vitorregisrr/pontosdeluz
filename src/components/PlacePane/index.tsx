@@ -24,10 +24,12 @@ type PlacePaneProps = {
   closePane: () => void
 }
 
-const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
+const PlacePane = ({ isVisible, data, closePane }: PlacePaneProps) => {
   const onCloseButtonClick = () => {
     closePane()
   }
+
+  console.log(isVisible)
 
   return (
     <>

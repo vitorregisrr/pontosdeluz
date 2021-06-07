@@ -14,29 +14,32 @@ export const PlacePaneWrapper = styled.div`
   transition: all 0.4s;
 
   ${(props: PlacePaneWrapperProps) => `
-      ${
-        props.isVisible
-          ? '.close-button{transform: translateY(50px)}; opacity: 1; pointer-events: all;'
-          : ''
-      }
+      ${!props.isVisible ? '.close-button{transform: translateY(50px)};' : ''}
   `}
 
   @media screen and (max-width: 768px) {
     transform: scale(0);
 
     ${(props: PlacePaneWrapperProps) => `
-      ${props.isVisible ? 'transform: scale(1);' : ''}
+      ${
+        props.isVisible
+          ? 'transform: scale(1); opacity: 1; pointer-events: all;'
+          : ''
+      }
   `}
   }
 
   @media screen and (min-width: 768px) {
     top: 17.6%;
     right: 40px;
-    opacity: 0;
     transform: translateX(300px);
 
     ${(props: PlacePaneWrapperProps) => `
-      ${props.isVisible ? 'transform: scale(1);' : ''}
+      ${
+        props.isVisible
+          ? 'transform: translateX(0); opacity: 1; pointer-events: all;'
+          : ''
+      }
   `}
   }
 `

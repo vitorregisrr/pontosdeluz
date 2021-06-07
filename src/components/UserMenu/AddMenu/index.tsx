@@ -20,6 +20,7 @@ const AddMenu = ({ isActive = false, toggleActive }: AddMenuProps) => {
         <S.AddMenuButton onClick={() => toggleActive()} isActive={isActive}>
           <PlusIcon />
         </S.AddMenuButton>
+        {/* @ts-ignore */}
         <S.AddMenuDropdown isActive={isActive}>
           <S.AddMenuDropdownList>
             <S.AddMenuDropdownItem>

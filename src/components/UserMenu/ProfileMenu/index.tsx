@@ -21,6 +21,7 @@ type ProfileMenuProps = {
 const ProfileMenu = ({ isActive = false, toggleActive }: ProfileMenuProps) => {
   return (
     <>
+      {/* @ts-ignore */}
       <S.Wrapper isActive={isActive}>
         <S.ProfileButton onClick={() => toggleActive()} isActive={isActive}>
           <S.ImageIcon src={'/img/profile-thumb.jpg'} />

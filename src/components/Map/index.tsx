@@ -96,47 +96,51 @@ const Map = ({ places }: MapProps) => {
     })
   )
   const [currFilters, setCurrFilters] = useState({
-    adress: '',
-    name: '',
-    filters: [''],
+    tags: [],
   })
 
   const [isPlacePaneOpen, setIsPlacePaneOpen] = useState(false)
   const [currentSlug, setCurrentSlug] = useState(null)
 
   const closePlace = () => {
-    setCurrentSlug(null)
     closePopupFix()
     setIsPlacePaneOpen(false)
+    setTimeout(() => setCurrentSlug(null), 300)
   }
 
   const openPlace = (slug: string) => {
+    let delayToShow = 0
     if (isPlacePaneOpen) {
-      closePlace()
-      setTimeout(() => setIsPlacePaneOpen(true), 300)
-    } else {
-      setIsPlacePaneOpen(true)
+      setIsPlacePaneOpen(false)
+      delayToShow = 300
     }
-    // @ts-ignore
-    setCurrentSlug(slug)
 
-    const cordinates = places?.filter((place) => place.slug === slug)[0]
-      .cordinates
-    // @ts-ignore
-    map.flyTo(
-      {
-        // @ts-ignore
-        lat: cordinates.latitude + 0.0002,
-        // @ts-ignore
-        lng: cordinates.longitude + 0.0008,
-      },
-      18,
-      {
-        animated: true,
-        duration: 2,
+    setTimeout(() => {
+      // @ts-ignore
+      setCurrentSlug(slug)
+      setIsPlacePaneOpen(true)
+      const cordinates = places?.filter((place) => place.slug === slug)[0]
+        .cordinates
+      const offset = {
+        x: window.innerWidth > 768 ? 0.0002 : 0,
+        y: window.innerWidth > 768 ? 0.0008 : 0,
       }
-    )
-    setMapZoom(18)
+      // @ts-ignore
+      map.flyTo(
+        {
+          // @ts-ignore
+          lat: cordinates.latitude + offset.x,
+          // @ts-ignore
+          lng: cordinates.longitude + offset.y,
+        },
+        18,
+        {
+          animated: true,
+          duration: 2,
+        }
+      )
+      setMapZoom(18)
+    }, delayToShow)
   }
 
   const closePopupFix = () => {
@@ -274,10 +278,7 @@ const Map = ({ places }: MapProps) => {
                 {/* @ts-ignore */}
                 {currentSlug !== slug ? (
                   <Tooltip offset={[14, -29]}>
-                    <img
-                      alt="Aldeia Indigena Yanawá"
-                      src={gallery[0].url}
-                    ></img>
+                    <img alt={name} src={gallery[0].url}></img>
                     <div className="body">
                       <h2 className="name">{name}</h2>
                       <p className="resume">{resume}</p>
@@ -289,7 +290,7 @@ const Map = ({ places }: MapProps) => {
                 ) : null}
 
                 <Popup offset={[0, -180]} closeOnClick={false}>
-                  <img alt="Aldeia Indigena Yanawá" src={gallery[0].url}></img>
+                  <img alt={name} src={gallery[0].url}></img>
                   <div className="body">
                     <h2 className="name">{name}</h2>
                     <p className="resume">{resume}</p>

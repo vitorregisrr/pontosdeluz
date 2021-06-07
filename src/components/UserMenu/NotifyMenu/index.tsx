@@ -22,6 +22,7 @@ const NotifyMenu = ({ isActive = false, toggleActive }: NotifyMenuProps) => {
           <BellIcon />
           <span className="number">2</span>
         </S.NotifyButton>
+        {/* @ts-ignore */}
         <S.NotifyDropdown isActive={isActive}>
           <S.NotifyDropdownList>
             <SimpleBar
