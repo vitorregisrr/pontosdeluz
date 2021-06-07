@@ -52,14 +52,10 @@ const UserMenu = () => {
           toggleActive={onProfileMenuClickHandler}
         />
       </S.UserMenuWrapper>
-      <CSSTransition
-        in={isProfileMenuActive || isNotifyMenuActive || isAddMenuActive}
-        timeout={300}
-        classNames="CSSTransition-backdropp"
-        unmountOnExit
-      >
-        <S.UserMenuBackdrop onClick={() => onBackdropClickHandler()} />
-      </CSSTransition>
+      <S.UserMenuBackdrop
+        isActive={isAddMenuActive || isNotifyMenuActive || isProfileMenuActive}
+        onClick={() => onBackdropClickHandler()}
+      />
     </>
   )
 }

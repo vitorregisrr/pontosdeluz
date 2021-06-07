@@ -31,18 +31,6 @@ const GlobalStyles = createGlobalStyle`
     background: var(--background);
     color: var(--white);
   }
-  body {
-  }
-  p,
-  a {
-    font-size: 2rem;
-    line-height: var(--medium);
-  }
-  a {
-    color: var(--highlight);
-  }
-
-  
   /* Animations */
 @keyframes float {
 	0% {
@@ -84,7 +72,7 @@ const GlobalStyles = createGlobalStyle`
 }
 .CSSTransition-fade-exit-active {
   opacity: 0;
-  transition: all 200ms;
+  transition: opacity 200ms;
 }
 
 /* backdrop */
@@ -93,14 +81,14 @@ const GlobalStyles = createGlobalStyle`
 }
 .CSSTransition-backdropp-enter-active {
   opacity: .4;
-  transition: all 200ms;
+  transition: opacity 200ms;
 }
 .CSSTransition-backdropp-exit {
   opacity: .4;
 }
 .CSSTransition-backdropp-exit-active {
   opacity: 0;
-  transition: all 200ms;
+  transition: opacity 200ms;
 }
 
 /* placepane */
@@ -112,7 +100,7 @@ const GlobalStyles = createGlobalStyle`
   .CSSTransition-placepane-enter-active {
     opacity: 1;
     transform:  scale(1);
-    transition: all 400ms;
+    transition: transform 400ms, opacity 400ms;
   }
   .CSSTransition-placepane-exit {
     opacity: 1;
@@ -121,7 +109,7 @@ const GlobalStyles = createGlobalStyle`
   .CSSTransition-placepane-exit-active {
     opacity: 0;
     transform:  scale(0);
-    transition: all 400ms;
+    transition:  transform 400ms, opacity 400ms;
   }
 }
 
@@ -133,7 +121,7 @@ const GlobalStyles = createGlobalStyle`
   .CSSTransition-placepane-enter-active {
     opacity: 1;
     transform: translateX(0);
-    transition: all 400ms;
+    transition: transform 400ms, opacity 400ms;
   }
   .CSSTransition-placepane-exit {
     opacity: 1;
@@ -142,7 +130,7 @@ const GlobalStyles = createGlobalStyle`
   .CSSTransition-placepane-exit-active {
     opacity: 0;
     transform: translateX(300px);
-    transition: all 400ms;
+    transition:  transform 400ms, opacity 400ms;
   }
 }
 `

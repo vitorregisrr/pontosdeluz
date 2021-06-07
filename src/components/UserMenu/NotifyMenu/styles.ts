@@ -103,6 +103,10 @@ export const NotifyButton = styled.button`
   }
 `
 
+type NotifyMenuDropdownProps = {
+  isActive: true
+}
+
 export const NotifyDropdown = styled.div`
   position: absolute;
   bottom: -18px;
@@ -113,6 +117,17 @@ export const NotifyDropdown = styled.div`
   background-color: rgba(250, 250, 250, 0.92);
   border-radius: 14px;
   transform: translate(-75.5%, 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+
+  ${(props: NotifyMenuDropdownProps) =>
+    props.isActive
+      ? `
+        opacity: 1;
+        pointer-events: all;
+      `
+      : null}
 
   &::before {
     content: '';

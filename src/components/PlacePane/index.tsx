@@ -14,6 +14,12 @@ type PlacePaneProps = {
   data: {
     id: string
     name: string
+    slug: string
+    aboutText: {
+      html: FunctionStringCallback
+    }
+    tags: { label: string; color: string }[]
+    gallery: { url: string }[]
   }
   closePane: () => void
 }
@@ -24,12 +30,7 @@ const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
   }
 
   return (
-    <CSSTransition
-      in={isVisible}
-      timeout={500}
-      classNames="CSSTransition-placepane"
-      unmountOnExit
-    >
+    <>
       <S.PlacePaneWrapper isVisible={isVisible}>
         <S.PlacePanePane>
           <S.PlacePaneCloseButton
@@ -40,7 +41,7 @@ const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
           </S.PlacePaneCloseButton>
           {/* Img */}
           <S.PlacePaneImgWrapper>
-            <S.PlacePaneImg src="/img/indigenasyanawa.png" />
+            <S.PlacePaneImg src={data.gallery ? data.gallery[0].url : ''} />
           </S.PlacePaneImgWrapper>
           {/* Body */}
           <S.PlacePaneBody>
@@ -54,90 +55,100 @@ const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
             >
               <S.PlacePaneTagList>
                 <span>ponto de luz</span>
-                <S.PlacePaneTag bgc="#533212">xamanismo</S.PlacePaneTag>
-                <S.PlacePaneTag bgc="#ca5639">natureza</S.PlacePaneTag>
-                <S.PlacePaneTag bgc="#815dd6">
-                  terapias holísticas
-                </S.PlacePaneTag>
+                {data.tags
+                  ? data.tags.map(
+                      (tag: { color: string; label: string }, index) => (
+                        <S.PlacePaneTag key={index} bgc={tag.color}>
+                          {tag.label}
+                        </S.PlacePaneTag>
+                      )
+                    )
+                  : null}
+                {/* <S.PlacePaneTag bgc="#533212">xamanismo</S.PlacePaneTag>
+                  <S.PlacePaneTag bgc="#ca5639">natureza</S.PlacePaneTag>
+                  <S.PlacePaneTag bgc="#815dd6">
+                    terapias holísticas
+                  </S.PlacePaneTag> */}
               </S.PlacePaneTagList>
-              {/* Title */}
-              <S.PlacePaneTitle>Reserva Indígena Yanawá</S.PlacePaneTitle>
-              {/* Description */}
-              <S.PlacePaneDescription>
-                <p>
-                  Qual Amazônia você quer conhecer? Sua verde imensidão abriga
-                  ao mesmo tempo uma floresta, nove países, a maior
-                  biodiversidade do mundo em um ecossistema tropical, nove
-                  estados brasileiros e a maior população indígena do Brasil.
-                </p>
-                <h4>neste ponto você encontra:</h4>
-                <ul>
-                  <li>• Contato com a natureza</li>
-                  <li>• Experiência multicultural</li>
-                  <li>• Artesanato local</li>
-                  <li>• Medicinas nativas</li>
-                  <li>• Oficinas e workshops</li>
-                </ul>
 
-                <h4>como entrar em contato:</h4>
-                <ul>
-                  <li>
-                    • emal:{' '}
-                    <a
-                      target="_blank"
-                      href="mailto:contato@reservawanawa.com.br"
-                      rel="noreferrer"
-                    >
-                      contato@reservawanawa.com.br
-                    </a>{' '}
-                  </li>
-                  <li>
-                    • fones:
-                    <a
-                      target="_blank"
-                      href="phoneto:(33)99321-3233"
-                      rel="noreferrer"
-                    >
-                      (33) 99321-3233
-                    </a>
-                    <a
-                      target="_blank"
-                      href="phoneto:(33)99321-3233"
-                      rel="noreferrer"
-                    >
-                      (33) 3253-9422
-                    </a>
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    • emal:{' '}
-                    <a
-                      target="_blank"
-                      href="mailto:contato@reservawanawa.com.br"
-                      rel="noreferrer"
-                    >
-                      contato@reservawanawa.com.br
-                    </a>{' '}
-                  </li>
-                  <li>
-                    • fones:
-                    <a
-                      target="_blank"
-                      href="phoneto:(33)99321-3233"
-                      rel="noreferrer"
-                    >
-                      (33) 99321-3233
-                    </a>
-                    <a
-                      target="_blank"
-                      href="phoneto:(33)99321-3233"
-                      rel="noreferrer"
-                    >
-                      (33) 3253-9422
-                    </a>
-                  </li>
-                </ul>
+              {/* Title */}
+              <S.PlacePaneTitle>{data.name}</S.PlacePaneTitle>
+              {/* Description */}
+              <S.PlacePaneDescription
+                dangerouslySetInnerHTML={{
+                  // @ts-ignore
+                  __html: data.aboutText?.html || '',
+                }}
+              >
+                {/* <p></p>
+                  <h4>neste ponto você encontra:</h4>
+                  <ul>
+                    <li>• Contato com a natureza</li>
+                    <li>• Experiência multicultural</li>
+                    <li>• Artesanato local</li>
+                    <li>• Medicinas nativas</li>
+                    <li>• Oficinas e workshops</li>
+                  </ul>
+
+                  <h4>como entrar em contato:</h4>
+                  <ul>
+                    <li>
+                      • emal:{' '}
+                      <a
+                        target="_blank"
+                        href="mailto:contato@reservawanawa.com.br"
+                        rel="noreferrer"
+                      >
+                        contato@reservawanawa.com.br
+                      </a>{' '}
+                    </li>
+                    <li>
+                      • fones:
+                      <a
+                        target="_blank"
+                        href="phoneto:(33)99321-3233"
+                        rel="noreferrer"
+                      >
+                        (33) 99321-3233
+                      </a>
+                      <a
+                        target="_blank"
+                        href="phoneto:(33)99321-3233"
+                        rel="noreferrer"
+                      >
+                        (33) 3253-9422
+                      </a>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li>
+                      • emal:{' '}
+                      <a
+                        target="_blank"
+                        href="mailto:contato@reservawanawa.com.br"
+                        rel="noreferrer"
+                      >
+                        contato@reservawanawa.com.br
+                      </a>{' '}
+                    </li>
+                    <li>
+                      • fones:
+                      <a
+                        target="_blank"
+                        href="phoneto:(33)99321-3233"
+                        rel="noreferrer"
+                      >
+                        (33) 99321-3233
+                      </a>
+                      <a
+                        target="_blank"
+                        href="phoneto:(33)99321-3233"
+                        rel="noreferrer"
+                      >
+                        (33) 3253-9422
+                      </a>
+                    </li>
+                  </ul> */}
               </S.PlacePaneDescription>
             </SimpleBar>
           </S.PlacePaneBody>
@@ -151,7 +162,7 @@ const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
               <S.PlacePaneShareMenu></S.PlacePaneShareMenu>
             </S.PlacePaneShareWrapper>
             <S.PlacePaneMoreLinkWrapper>
-              <Link href="/">
+              <Link href={`'ponto/'${data.slug}`}>
                 <>
                   Acessar página completa <ReadMoreIcon />
                 </>
@@ -160,7 +171,9 @@ const PlacePane = ({ isVisible = false, data, closePane }: PlacePaneProps) => {
           </S.PlacePaneFooter>
         </S.PlacePanePane>
       </S.PlacePaneWrapper>
-    </CSSTransition>
+
+      <S.PlacePaneBackdrop isVisible={isVisible} onClick={onCloseButtonClick} />
+    </>
   )
 }
 

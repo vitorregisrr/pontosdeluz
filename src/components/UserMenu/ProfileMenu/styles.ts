@@ -49,6 +49,10 @@ export const ImageIcon = styled.img`
   object-position: center center;
 `
 
+type ProfileDropdownProps = {
+  isActive: boolean
+}
+
 export const ProfileDropdown = styled.div`
   position: absolute;
   bottom: -12px;
@@ -58,7 +62,17 @@ export const ProfileDropdown = styled.div`
   background-color: rgba(250, 250, 250, 0.92);
   border-radius: 14px;
   transform: translate(-68.5%, 100%);
+  opacity: 0;
+  pointer-events: none;
   transition: all 0.3s;
+
+  ${(props: ProfileDropdownProps) =>
+    props.isActive
+      ? `
+        opacity: 1;
+        pointer-events: all;
+      `
+      : null}
 
   &::before {
     content: '';

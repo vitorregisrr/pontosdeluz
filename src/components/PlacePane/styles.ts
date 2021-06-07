@@ -8,16 +8,36 @@ export const PlacePaneWrapper = styled.div`
   position: absolute;
   top: 18.6%;
   right: 10px;
-  z-index: 800;
-  opacity: 1;
+  z-index: 1400;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s;
 
   ${(props: PlacePaneWrapperProps) => `
-      ${!props.isVisible ? '.close-button{transform: translateY(50px)}' : ''}
+      ${
+        props.isVisible
+          ? '.close-button{transform: translateY(50px)}; opacity: 1; pointer-events: all;'
+          : ''
+      }
   `}
+
+  @media screen and (max-width: 768px) {
+    transform: scale(0);
+
+    ${(props: PlacePaneWrapperProps) => `
+      ${props.isVisible ? 'transform: scale(1);' : ''}
+  `}
+  }
 
   @media screen and (min-width: 768px) {
     top: 17.6%;
     right: 40px;
+    opacity: 0;
+    transform: translateX(300px);
+
+    ${(props: PlacePaneWrapperProps) => `
+      ${props.isVisible ? 'transform: scale(1);' : ''}
+  `}
   }
 `
 
@@ -253,4 +273,33 @@ export const PlacePaneCloseButton = styled.button`
     color: #0f0324;
     transition: all 0.4s;
   }
+`
+
+type PlacePaneBackdropProps = {
+  isVisible: boolean
+}
+
+export const PlacePaneBackdrop = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1300;
+  cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+
+  ${(props: PlacePaneBackdropProps) =>
+    props.isVisible
+      ? `
+        opacity: 0.4;
+        pointer-events: all;
+      `
+      : null}
 `

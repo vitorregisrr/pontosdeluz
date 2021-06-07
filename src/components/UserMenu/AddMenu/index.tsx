@@ -20,37 +20,34 @@ const AddMenu = ({ isActive = false, toggleActive }: AddMenuProps) => {
         <S.AddMenuButton onClick={() => toggleActive()} isActive={isActive}>
           <PlusIcon />
         </S.AddMenuButton>
-        <CSSTransition
-          in={isActive}
-          timeout={300}
-          classNames="CSSTransition-fade"
-          unmountOnExit
-        >
-          <S.AddMenuDropdown>
-            <S.AddMenuDropdownList>
-              <S.AddMenuDropdownItem>
-                <Link href="/">
-                  <>
-                    {' '}
-                    <SparklesIcon className="sub-icon" />
-                    <PlusIcon className="plus-icon" />
-                    <span>Submeter um ponto para este mapa</span>
-                  </>
-                </Link>
-              </S.AddMenuDropdownItem>
-              <S.AddMenuDropdownItem>
-                <Link href="/">
-                  <>
-                    {' '}
-                    <MapIcon className="sub-icon" />
-                    <PlusIcon className="plus-icon" />
-                    <span>Criar meu próprio mapa</span>
-                  </>
-                </Link>
-              </S.AddMenuDropdownItem>
-            </S.AddMenuDropdownList>
-          </S.AddMenuDropdown>
-        </CSSTransition>
+        <S.AddMenuDropdown isActive={isActive}>
+          <S.AddMenuDropdownList>
+            <S.AddMenuDropdownItem>
+              <a
+                href="https://app.graphcms.com/582d048eddf8400783e74e6f8df6097e/master/schema/model/Place"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <>
+                  {' '}
+                  <SparklesIcon className="sub-icon" />
+                  <PlusIcon className="plus-icon" />
+                  <span>Submeter um ponto para este mapa</span>
+                </>
+              </a>
+            </S.AddMenuDropdownItem>
+            <S.AddMenuDropdownItem>
+              <Link href="/">
+                <>
+                  {' '}
+                  <MapIcon className="sub-icon" />
+                  <PlusIcon className="plus-icon" />
+                  <span>Criar meu próprio mapa</span>
+                </>
+              </Link>
+            </S.AddMenuDropdownItem>
+          </S.AddMenuDropdownList>
+        </S.AddMenuDropdown>
       </S.Wrapper>
     </>
   )

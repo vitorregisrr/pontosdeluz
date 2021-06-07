@@ -56,6 +56,10 @@ export const AddMenuButton = styled.button`
   }
 `
 
+type AddMenuDropdownProps = {
+  isActive: boolean
+}
+
 export const AddMenuDropdown = styled.div`
   position: absolute;
   bottom: -7.6px;
@@ -65,6 +69,17 @@ export const AddMenuDropdown = styled.div`
   background-color: rgba(250, 250, 250, 0.92);
   border-radius: 14px;
   transform: translate(-68.5%, 100%);
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.3s;
+
+  ${(props: AddMenuDropdownProps) =>
+    props.isActive
+      ? `
+        opacity: 1;
+        pointer-events: all;
+      `
+      : null}
 
   &::before {
     content: '';
@@ -123,6 +138,13 @@ export const AddMenuDropdownItem = styled.li`
   svg {
     width: 17px;
     margin-right: 5px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    color: inherit !important;
+    text-decoration: none;
   }
 
   .sub-icon {

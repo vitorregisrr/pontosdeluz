@@ -102,10 +102,10 @@ const Map = ({ places }: MapProps) => {
   })
 
   const [isPlacePaneOpen, setIsPlacePaneOpen] = useState(false)
-  const [currentSlug, setCurrentSlug] = useState('')
+  const [currentSlug, setCurrentSlug] = useState(null)
 
   const closePlace = () => {
-    setCurrentSlug('')
+    setCurrentSlug(null)
     closePopupFix()
     setIsPlacePaneOpen(false)
   }
@@ -114,7 +114,11 @@ const Map = ({ places }: MapProps) => {
     if (isPlacePaneOpen) {
       closePlace()
       setTimeout(() => setIsPlacePaneOpen(true), 300)
+    } else {
+      setIsPlacePaneOpen(true)
     }
+    // @ts-ignore
+    setCurrentSlug(slug)
 
     const cordinates = places?.filter((place) => place.slug === slug)[0]
       .cordinates
@@ -133,11 +137,6 @@ const Map = ({ places }: MapProps) => {
       }
     )
     setMapZoom(18)
-    setCurrentSlug(slug)
-
-    if (!isPlacePaneOpen) {
-      setIsPlacePaneOpen(true)
-    }
   }
 
   const closePopupFix = () => {
@@ -149,12 +148,7 @@ const Map = ({ places }: MapProps) => {
   }
 
   const onMarkerClick = (slug: string) => {
-    console.log(markersRefs)
-    if (slug !== currentSlug) {
-      openPlace(slug)
-    } else {
-      closePlace()
-    }
+    openPlace(slug)
   }
 
   const zoomOut = () => {
@@ -190,130 +184,132 @@ const Map = ({ places }: MapProps) => {
   }
 
   return (
-    <S.MapWrapper
-      className={`${mapZoom > 14 ? 'upperMarkers' : ''} ${
-        isPlacePaneOpen ? 'isPlacePaneOpen' : ''
-      }`}
-    >
-      <MapHeader
-        /* @ts-ignore */
-        setMapPosition={setMapPosition}
-        /* @ts-ignore */
-        openPlace={openPlace}
-        zoomOutMap={zoomOut}
-        /* @ts-ignore */
-        placesOptions={places?.map((place) => {
-          return { label: place.name, value: place.slug }
-        })}
-        /* @ts-ignore */
-        categoriesOptions={places?.map((place) => {
-          return { label: place.name, value: place.slug }
-        })}
-      />
+    <>
       <PlacePane
-        data={{ id: '1', name: 'Ponto 1' }}
+        // @ts-ignore
+        data={
+          currentSlug
+            ? { ...places?.filter((place) => place.slug === currentSlug)[0] }
+            : {}
+        }
         isVisible={isPlacePaneOpen}
         closePane={() => {
-          closePopupFix()
           closePlace()
         }}
       />
-      <MapContainer
-        center={[mapCenter[0], mapCenter[1]]}
-        attributionControl={false}
-        zoom={mapZoom}
-        minZoom={3}
-        maxBounds={[
-          [-80, 220],
-          [180, -180],
-        ]}
-        // @ts-ignore
-        loadingControl={true}
-        scrollWheelZoom={true}
-        // @ts-ignore
-        whenCreated={setMap}
-        style={{ height: '100%', width: '100%' }}
+
+      <S.MapWrapper
+        className={`${mapZoom > 14 ? 'upperMarkers' : ''} ${
+          isPlacePaneOpen ? 'isPlacePaneOpen' : ''
+        }`}
       >
-        <CustomTileLayer />
-        <MapConsumer>
-          {(map) => {
-            const width =
-              window.innerWidth ||
-              document.documentElement.clientWidth ||
-              document.body.clientWidth
+        <MapHeader
+          /* @ts-ignore */
+          setMapPosition={setMapPosition}
+          /* @ts-ignore */
+          openPlace={openPlace}
+          zoomOutMap={zoomOut}
+          /* @ts-ignore */
+          placesOptions={places?.map((place) => {
+            return { label: place.name, value: place.slug }
+          })}
+          /* @ts-ignore */
+          categoriesOptions={places?.map((place) => {
+            return { label: place.name, value: place.slug }
+          })}
+        />
+        <MapContainer
+          center={[mapCenter[0], mapCenter[1]]}
+          attributionControl={false}
+          zoom={mapZoom}
+          minZoom={3}
+          maxBounds={[
+            [-80, 220],
+            [180, -180],
+          ]}
+          // @ts-ignore
+          loadingControl={true}
+          scrollWheelZoom={true}
+          // @ts-ignore
+          whenCreated={setMap}
+          style={{ height: '100%', width: '100%' }}
+        >
+          <CustomTileLayer />
+          <MapConsumer>
+            {(map) => {
+              const width =
+                window.innerWidth ||
+                document.documentElement.clientWidth ||
+                document.body.clientWidth
 
-            if (width < 768) {
-              map.setMinZoom(2)
-            }
+              if (width < 768) {
+                map.setMinZoom(2)
+              }
 
-            map.on('zoomend', () => {
-              setMapZoom(map.getZoom())
-            })
+              map.on('zoomend', () => {
+                setMapZoom(map.getZoom())
+              })
 
-            return null
-          }}
-        </MapConsumer>
+              return null
+            }}
+          </MapConsumer>
 
-        {places?.map(({ slug, name, resume, cordinates, gallery }, index) => {
-          const { latitude, longitude } = cordinates
+          {places?.map(({ slug, name, resume, cordinates, gallery }, index) => {
+            const { latitude, longitude } = cordinates
 
-          return (
-            <Marker
-              // @ts-ignore
-              useRef={(element) => itemsEls.current.push(element)}
-              key={`place-${slug}`}
-              position={[latitude, longitude]}
-              icon={iconMarker}
-              eventHandlers={{
-                click: () => {
-                  onMarkerClick(slug)
-                },
+            return (
+              <Marker
                 // @ts-ignore
-                mouseOn: (e) => {
-                  e.target.classList.add('animation-none')
-                },
-                // @ts-ignore
-                mouseOut: (e) => {
-                  e.target.classList.remove('animation-none')
-                },
-              }}
-              aria-label={name}
-            >
-              {/* @ts-ignore */}
-              {currentSlug !== slug ? (
-                <Tooltip offset={[14, -29]}>
+                useRef={(element) => itemsEls.current.push(element)}
+                key={`place-${slug}`}
+                position={[latitude, longitude]}
+                icon={iconMarker}
+                eventHandlers={{
+                  click: () => {
+                    onMarkerClick(slug)
+                  },
+                }}
+                aria-label={name}
+              >
+                {/* @ts-ignore */}
+                {currentSlug !== slug ? (
+                  <Tooltip offset={[14, -29]}>
+                    <img
+                      alt="Aldeia Indigena Yanawá"
+                      src={gallery[0].url}
+                    ></img>
+                    <div className="body">
+                      <h2 className="name">{name}</h2>
+                      <p className="resume">{resume}</p>
+                      <span className="span">
+                        Clique para abrir <PlusIcon />
+                      </span>
+                    </div>
+                  </Tooltip>
+                ) : null}
+
+                <Popup offset={[0, -180]} closeOnClick={false}>
                   <img alt="Aldeia Indigena Yanawá" src={gallery[0].url}></img>
                   <div className="body">
                     <h2 className="name">{name}</h2>
                     <p className="resume">{resume}</p>
-                    <span className="span">
-                      Clique para abrir <PlusIcon />
+                    <span
+                      onClick={() => {
+                        closePopupFix()
+                        closePlace()
+                      }}
+                      className="span"
+                    >
+                      Clique para fechar <TimesIcon />
                     </span>
                   </div>
-                </Tooltip>
-              ) : null}
-
-              <Popup offset={[0, -180]} closeOnClick={false}>
-                <img alt="Aldeia Indigena Yanawá" src={gallery[0].url}></img>
-                <div className="body">
-                  <h2 className="name">{name}</h2>
-                  <p className="resume">{resume}</p>
-                  <span
-                    onClick={() => {
-                      closePopupFix()
-                      closePlace()
-                    }}
-                    className="span"
-                  >
-                    Clique para fechar <TimesIcon />
-                  </span>
-                </div>
-              </Popup>
-            </Marker>
-          )
-        })}
-      </MapContainer>
-    </S.MapWrapper>
+                </Popup>
+              </Marker>
+            )
+          })}
+        </MapContainer>
+      </S.MapWrapper>
+    </>
   )
 }
 

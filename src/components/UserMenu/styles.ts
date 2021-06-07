@@ -15,6 +15,10 @@ export const UserMenuWrapper = styled.div`
   }
 `
 
+type UserMenuBackdropProps = {
+  isActive: boolean
+}
+
 export const UserMenuBackdrop = styled.div`
   position: absolute;
   left: 0;
@@ -22,7 +26,17 @@ export const UserMenuBackdrop = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #000;
-  opacity: 0.4;
-  z-index: 1300;
+  opacity: 0;
   cursor: pointer;
+  pointer-events: none;
+  z-index: 1300;
+  transition: opacity 0.3s;
+
+  ${(props: UserMenuBackdropProps) =>
+    props.isActive
+      ? `
+        opacity: 0.4;
+        pointer-events: all;
+      `
+      : null}
 `
