@@ -1,8 +1,23 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
+  position: relative;
+  padding-top: 4rem;
+  height: 100vh;
   background-color: #fff;
-  padding: var(--large) var(--medium);
+
+  .simplebar-offset {
+    width: 100%;
+  }
+
+  .simplebar-track.simplebar-vertical {
+    right: 4vw;
+    opacity: 0.6;
+
+    &::before {
+      width: 4px;
+    }
+  }
 
   * {
     color: var(--dark);
@@ -27,23 +42,8 @@ export const Wrapper = styled.div`
 `
 
 export const Container = styled.section`
-  position: relative;
-  height: 100vh;
   max-width: var(--container);
   margin: auto;
-
-  .simplebar-offset {
-    width: 100%;
-  }
-
-  .simplebar-track.simplebar-vertical {
-    right: -66px;
-    opacity: 0.6;
-
-    &::before {
-      width: 4px;
-    }
-  }
 `
 
 export const TagList = styled.ul`
@@ -82,6 +82,7 @@ export const Tag = styled.li`
 export const Heading = styled.h1`
   font-size: 4.5rem;
   margin-bottom: 1.5rem;
+  max-width: 80rem;
   color: #020726;
 `
 
@@ -96,30 +97,42 @@ export const Body = styled.div`
     font-size: 1.8rem;
     font-weight: 300;
     margin-bottom: var(--medium);
+    max-width: 80rem;
   }
 
+  h5,
   h4,
   h2 {
-    font-size: 2.6rem;
-    margin-bottom: 10px;
+    font-size: 2.2rem;
+    margin-top: 2.4rem;
+    color: rgba(0, 0, 0, 1);
     font-weight: 600;
   }
 
-  h5 {
-    font-size: 2.4rem;
-    margin-bottom: 30px;
-    font-weight: 300;
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    li {
+      font-size: 1.7rem;
+      font-weight: 400;
+      opacity: 0.8;
+      margin-right: 20px;
+      white-space: nowrap;
+    }
   }
 `
 
 export const Gallery = styled.div`
   display: grid;
   grid-gap: var(--medium);
-  margin-bottom: 10rem;
+  margin-bottom: 3rem;
 
   img {
     width: 100%;
-    border-radius: 40%;
+    border-radius: 2%;
     background: #f6f7f8;
     background-image: linear-gradient(
       to right,
@@ -138,5 +151,9 @@ export const Gallery = styled.div`
         background-position: 40rem 0;
       }
     }
+  }
+
+  .disqus-thread {
+    margin-bottom: 14rem;
   }
 `

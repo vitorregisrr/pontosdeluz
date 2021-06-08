@@ -1,8 +1,13 @@
 import SimpleBar from 'simplebar-react'
+import dynamic from 'next/dynamic'
 import LinkWrapper from 'components/UI/LinkWrapper'
 import { CloseOutline } from '@styled-icons/evaicons-outline/CloseOutline'
 import DisqusBox from 'components/DisqusBox'
 import { useRouter } from 'next/dist/client/router'
+
+const Map = dynamic(() => import('./Map'), {
+  ssr: false,
+})
 
 // @ts-ignore
 import * as S from './styles.ts'
@@ -23,31 +28,35 @@ export type PlacesTemplateProps = {
     }
     categories: { name: string; value: string; color: { hex: string } }[]
     gallery: ImageProps[]
+    resume: string
+    cordinates: {
+      latitude: number
+      longitude: number
+    }
   }
 }
 
 export default function PlacesTemplate({ place }: PlacesTemplateProps) {
   const router = useRouter()
-
   if (router.isFallback) return null
 
   return (
     <>
       <LinkWrapper href="/">
-        <span style={{ color: '#020726' }}>
+        <span style={{ color: '#010714' }}>
           <CloseOutline size={32} aria-label="Go back to map" />
         </span>
       </LinkWrapper>
-
       <S.Wrapper>
-        <S.Container>
-          <SimpleBar
-            autoHide={false}
-            style={{
-              height: '100%',
-              width: '100%',
-            }}
-          >
+        <SimpleBar
+          // @ts-ignore
+          autoHide={false}
+          style={{
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          <S.Container>
             <S.TagList>
               <span>ponto de luz</span>
               {place.categories
@@ -69,7 +78,10 @@ export default function PlacesTemplate({ place }: PlacesTemplateProps) {
               // @ts-ignore
               dangerouslySetInnerHTML={{ __html: place.aboutText?.html || '' }}
             />
+          </S.Container>
+          <Map place={place} />
 
+          <S.Container>
             <S.Gallery>
               {place.gallery.map((image, index) => (
                 <img key={`photo-${index}`} src={image.url} alt={place.name} />
@@ -81,8 +93,8 @@ export default function PlacesTemplate({ place }: PlacesTemplateProps) {
               url={`/place/${place.slug}`}
               title={place.name}
             ></DisqusBox>
-          </SimpleBar>
-        </S.Container>
+          </S.Container>
+        </SimpleBar>
       </S.Wrapper>
     </>
   )
