@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import SimpleBar from 'simplebar-react'
 import dynamic from 'next/dynamic'
 import LinkWrapper from 'components/UI/LinkWrapper'
@@ -5,12 +6,15 @@ import { CloseOutline } from '@styled-icons/evaicons-outline/CloseOutline'
 import DisqusBox from 'components/DisqusBox'
 import { useRouter } from 'next/dist/client/router'
 
+import { ShareSquare as ShareIcon } from '@styled-icons/fa-regular'
+
 const Map = dynamic(() => import('./Map'), {
   ssr: false,
 })
 
 // @ts-ignore
 import * as S from './styles.ts'
+import ShareDropdown from 'components/ShareDropdown'
 
 type ImageProps = {
   url: string
@@ -38,6 +42,8 @@ export type PlacesTemplateProps = {
 
 export default function PlacesTemplate({ place }: PlacesTemplateProps) {
   const router = useRouter()
+  const [isShareActive, setIsShareActive] = useState(false)
+
   if (router.isFallback) return null
 
   return (
@@ -72,8 +78,18 @@ export default function PlacesTemplate({ place }: PlacesTemplateProps) {
                   )
                 : null}
             </S.TagList>
-            <S.Heading>{place.name}</S.Heading>
-
+            <S.Heading>
+              {place.name}{' '}
+              <S.ShareWrapper>
+                <S.ShareButton onClick={() => setIsShareActive((old) => !old)}>
+                  <ShareIcon size={40} />
+                </S.ShareButton>
+                <ShareDropdown
+                  url={`https://pontosdeluz.vercel.app/place/${place.slug}`}
+                  isActive={isShareActive}
+                />
+              </S.ShareWrapper>
+            </S.Heading>
             <S.Body
               // @ts-ignore
               dangerouslySetInnerHTML={{ __html: place.aboutText?.html || '' }}

@@ -176,3 +176,44 @@ export const Gallery = styled.div`
     margin-bottom: 14rem;
   }
 `
+
+export const ShareWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`
+
+export const ShareButton = styled.button`
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  font-weight: 500;
+  text-transform: lowercase;
+  cursor: pointer;
+  transition: all 0.4s;
+  line-height: 2;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.4rem;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
+  svg {
+    width: 23.4px;
+    margin-right: 3px;
+    margin-top: 2px;
+
+    @media screen and (min-width: 768px) {
+      width: 25px;
+    }
+  }
+`
