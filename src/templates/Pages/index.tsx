@@ -5,7 +5,7 @@ import * as S from './styles'
 
 export type PageTemplateProps = {
   heading: string
-  body: string
+  body: { html: string }
 }
 
 const PageTemplate = ({ heading, body }: PageTemplateProps) => (
@@ -17,7 +17,7 @@ const PageTemplate = ({ heading, body }: PageTemplateProps) => (
     <S.Heading>{heading}</S.Heading>
 
     <S.Body>
-      <div dangerouslySetInnerHTML={{ __html: body }} />
+      <div dangerouslySetInnerHTML={{ __html: body.html }} />
     </S.Body>
   </S.Content>
 )

@@ -29,8 +29,6 @@ const PlacePane = ({ isVisible, data, closePane }: PlacePaneProps) => {
     closePane()
   }
 
-  console.log(isVisible)
-
   return (
     <>
       <S.PlacePaneWrapper isVisible={isVisible}>
@@ -92,7 +90,7 @@ const PlacePane = ({ isVisible, data, closePane }: PlacePaneProps) => {
               <S.PlacePaneShareMenu></S.PlacePaneShareMenu>
             </S.PlacePaneShareWrapper>
             <S.PlacePaneMoreLinkWrapper>
-              <Link href={`'ponto/'${data.slug}`}>
+              <Link href={`/place/${data.slug}`}>
                 <>
                   Acessar página completa <ReadMoreIcon />
                 </>

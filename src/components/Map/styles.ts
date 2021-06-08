@@ -123,6 +123,11 @@ export const MapWrapper = styled.div`
         margin-bottom: 0;
         font-weight: bold;
         color: rgba(0, 0, 0, 0.9);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
 
       .resume {
@@ -200,12 +205,17 @@ export const MapWrapper = styled.div`
           margin-bottom: 0;
           font-weight: bold;
           color: rgba(0, 0, 0, 0.9);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
         }
 
         .resume {
           font-weight: 400;
           font-size: 0.9rem;
-          color: rgba(0, 0, 0, 0.4);
+          color: rgba(0, 0, 0, 0.6);
           line-height: 1.2;
           margin-top: 4px;
           height: 30px;
@@ -218,7 +228,7 @@ export const MapWrapper = styled.div`
 
         .span {
           font-size: 0.85rem;
-          color: rgba(0, 0, 0, 0.5);
+          color: rgba(0, 0, 0, 0.7);
 
           svg {
             width: 7px;

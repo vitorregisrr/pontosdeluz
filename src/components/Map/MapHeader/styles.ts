@@ -117,12 +117,12 @@ export const MapHeaderFilters = styled.form`
   }
 
   .input-wrapper {
-    &:nth-child(1) {
-      z-index: 4;
+    &:nth-child(2) {
+      z-index: 6;
     }
 
-    &:nth-child(2) {
-      z-index: 3;
+    &:nth-child(3) {
+      z-index: 4;
     }
   }
 
