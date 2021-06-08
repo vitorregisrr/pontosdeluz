@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const UserMenuWrapper = styled.div`
   position: fixed;
-  z-index: 1400; // bigger than leaflet
+  z-index: 1800; // bigger than leaflet
   display: flex;
   align-items: center;
   top: calc(var(--medium) - 12px);

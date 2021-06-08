@@ -22,6 +22,8 @@ type Cordinates = {
   latitude: number
 }
 
+type TagsProps = { name: string; value: string; color: { hex: string } }[]
+
 type ImageProps = {
   url: string
   height: number
@@ -34,6 +36,7 @@ type Place = {
   slug: string
   visited: boolean
   visible: boolean
+  categories: TagsProps
   resume?: string
   aboutText?: {
     html: string
@@ -49,6 +52,7 @@ type Place = {
 
 export type MapProps = {
   places?: Place[]
+  tags?: TagsProps
 }
 
 type AdressProps = {
@@ -76,7 +80,7 @@ const CustomTileLayer = () => {
   )
 }
 
-const Map = ({ places }: MapProps) => {
+const Map = ({ places, tags }: MapProps) => {
   const baseIcon = {
     iconUrl: '/img/light-orb.png',
     iconSize: [60, 60],
@@ -95,6 +99,7 @@ const Map = ({ places }: MapProps) => {
       ...baseIcon,
     })
   )
+  const [currPlaces, setCurrPlaces] = useState(places || [])
   const [currFilters, setCurrFilters] = useState({
     tags: [],
   })
@@ -103,12 +108,15 @@ const Map = ({ places }: MapProps) => {
   const [currentSlug, setCurrentSlug] = useState(null)
 
   const closePlace = () => {
-    closePopupFix()
     setIsPlacePaneOpen(false)
     setTimeout(() => setCurrentSlug(null), 300)
+
+    if (window.innerWidth > 768) {
+      closePopupFix()
+    }
   }
 
-  const openPlace = (slug: string) => {
+  const openPlace = (slug: string, shouldOpenPane = true) => {
     let delayToShow = 0
     if (isPlacePaneOpen) {
       setIsPlacePaneOpen(false)
@@ -116,15 +124,19 @@ const Map = ({ places }: MapProps) => {
     }
 
     setTimeout(() => {
-      // @ts-ignore
-      setCurrentSlug(slug)
-      setIsPlacePaneOpen(true)
       const cordinates = places?.filter((place) => place.slug === slug)[0]
         .cordinates
       const offset = {
         x: window.innerWidth > 768 ? 0.0002 : 0,
         y: window.innerWidth > 768 ? 0.0008 : 0,
       }
+
+      if (shouldOpenPane) {
+        // @ts-ignore
+        setCurrentSlug(slug)
+        setIsPlacePaneOpen(true)
+      }
+
       // @ts-ignore
       map.flyTo(
         {
@@ -152,7 +164,11 @@ const Map = ({ places }: MapProps) => {
   }
 
   const onMarkerClick = (slug: string) => {
-    openPlace(slug)
+    if (currentSlug === slug) {
+      closePlace()
+    } else {
+      openPlace(slug, window.innerWidth > 768 ? true : false)
+    }
   }
 
   const zoomOut = () => {
@@ -187,6 +203,23 @@ const Map = ({ places }: MapProps) => {
     }
   }
 
+  const updatePlacesByTag = (tags: string[]) => {
+    if (tags.length > 0) {
+      const newCurrPlaces = places?.filter((place) => {
+        // valores das tags contidas no item atual
+        // @ts-ignore
+        const placeTagsValues = place.categories.map((tag) => tag.value)
+        // @ts-ignore
+        return placeTagsValues.some((r) => tags.includes(r))
+      })
+      closePlace()
+      setCurrPlaces(newCurrPlaces || [])
+    } else {
+      // @ts-ignore
+      setCurrPlaces(places)
+    }
+  }
+
   return (
     <>
       <PlacePane
@@ -211,22 +244,32 @@ const Map = ({ places }: MapProps) => {
           /* @ts-ignore */
           setMapPosition={setMapPosition}
           /* @ts-ignore */
-          openPlace={openPlace}
+          openPlace={onMarkerClick}
           zoomOutMap={zoomOut}
           /* @ts-ignore */
           placesOptions={places?.map((place) => {
             return { label: place.name, value: place.slug }
           })}
           /* @ts-ignore */
-          categoriesOptions={places?.map((place) => {
-            return { label: place.name, value: place.slug }
+          categoriesOptions={tags?.map((tag) => {
+            return {
+              // @ts-ignore
+              label: tag.name,
+              // @ts-ignore
+              value: tag.value,
+              // @ts-ignore
+              color: tag.color.hex,
+            }
           })}
+          // @ts-ignore
+          updatePlacesByTag={updatePlacesByTag}
         />
         <MapContainer
           center={[mapCenter[0], mapCenter[1]]}
           attributionControl={false}
           zoom={mapZoom}
           minZoom={3}
+          tap={false}
           maxBounds={[
             [-80, 220],
             [180, -180],
@@ -258,56 +301,71 @@ const Map = ({ places }: MapProps) => {
             }}
           </MapConsumer>
 
-          {places?.map(({ slug, name, resume, cordinates, gallery }, index) => {
-            const { latitude, longitude } = cordinates
+          {currPlaces.map(
+            ({ slug, name, resume, cordinates, gallery }, index) => {
+              const { latitude, longitude } = cordinates
 
-            return (
-              <Marker
-                // @ts-ignore
-                useRef={(element) => itemsEls.current.push(element)}
-                key={`place-${slug}`}
-                position={[latitude, longitude]}
-                icon={iconMarker}
-                eventHandlers={{
-                  click: () => {
-                    onMarkerClick(slug)
-                  },
-                }}
-                aria-label={name}
-              >
-                {/* @ts-ignore */}
-                {currentSlug !== slug ? (
-                  <Tooltip offset={[14, -29]}>
+              return (
+                <Marker
+                  key={`place-${slug}`}
+                  position={[latitude, longitude]}
+                  icon={iconMarker}
+                  eventHandlers={{
+                    click: () => {
+                      onMarkerClick(slug)
+                    },
+                  }}
+                  aria-label={name}
+                >
+                  {/* @ts-ignore */}
+                  {currentSlug !== slug && window.innerWidth > 768 ? (
+                    <Tooltip offset={[14, -29]}>
+                      <img alt={name} src={gallery[0].url}></img>
+                      <div className="body">
+                        <h2 className="name">{name}</h2>
+                        <p className="resume">{resume}</p>
+                        <span className="span">
+                          Clique para abrir <PlusIcon />
+                        </span>
+                      </div>
+                    </Tooltip>
+                  ) : null}
+
+                  <Popup
+                    offset={[0, -180]}
+                    closeOnClick={true}
+                    onClose={closePlace}
+                  >
                     <img alt={name} src={gallery[0].url}></img>
                     <div className="body">
                       <h2 className="name">{name}</h2>
                       <p className="resume">{resume}</p>
-                      <span className="span">
-                        Clique para abrir <PlusIcon />
-                      </span>
+                      {window.innerWidth > 768 ? (
+                        <span
+                          onClick={() => {
+                            closePopupFix()
+                            closePlace()
+                          }}
+                          className="span"
+                        >
+                          Clique para fechar <TimesIcon />
+                        </span>
+                      ) : (
+                        <span
+                          onClick={() => {
+                            openPlace(slug, true)
+                          }}
+                          className="span"
+                        >
+                          Clique para ler mais <PlusIcon />
+                        </span>
+                      )}
                     </div>
-                  </Tooltip>
-                ) : null}
-
-                <Popup offset={[0, -180]} closeOnClick={false}>
-                  <img alt={name} src={gallery[0].url}></img>
-                  <div className="body">
-                    <h2 className="name">{name}</h2>
-                    <p className="resume">{resume}</p>
-                    <span
-                      onClick={() => {
-                        closePopupFix()
-                        closePlace()
-                      }}
-                      className="span"
-                    >
-                      Clique para fechar <TimesIcon />
-                    </span>
-                  </div>
-                </Popup>
-              </Marker>
-            )
-          })}
+                  </Popup>
+                </Marker>
+              )
+            }
+          )}
         </MapContainer>
       </S.MapWrapper>
     </>

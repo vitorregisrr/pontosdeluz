@@ -34,7 +34,15 @@ export const GET_PLACES = gql`
       visited
       name
       resume
-      tags
+      categories {
+        ... on Tag {
+          name
+          color {
+            hex
+          }
+          value
+        }
+      }
       cordinates {
         longitude
         latitude
@@ -49,6 +57,14 @@ export const GET_PLACES = gql`
         height
       }
     }
+
+    tags {
+      name
+      color {
+        hex
+      }
+      value
+    }
   }
 `
 
@@ -61,7 +77,15 @@ export const GET_PLACE_BY_SLUG = gql`
       visited
       name
       resume
-      tags
+      categories {
+        ... on Tag {
+          name
+          color {
+            hex
+          }
+          value
+        }
+      }
       cordinates {
         longitude
         latitude

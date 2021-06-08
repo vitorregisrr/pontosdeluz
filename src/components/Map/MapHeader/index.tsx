@@ -13,6 +13,7 @@ type MapHeaderProps = {
   openPlace: () => void
   placesOptions: { value: string; label: string }[]
   categoriesOptions: { value: string; label: string; color: string }[]
+  updatePlacesByTag: () => void
 }
 
 const MapHeader = ({
@@ -21,6 +22,7 @@ const MapHeader = ({
   openPlace,
   placesOptions,
   categoriesOptions,
+  updatePlacesByTag,
 }: MapHeaderProps) => {
   // Mobile visibility
   const [isActive, setIsActive] = useState(false)
@@ -62,43 +64,12 @@ const MapHeader = ({
         />
         <FormSelect
           placeholder="Filtrar por categorias..."
-          options={[
-            {
-              label: 'Ecovilas e Permacultura',
-              value: 'ecovilas',
-              color: '#307012',
-            },
-            {
-              label: 'Natureza',
-              value: 'naturezaelazer',
-              color: '#b96a52',
-            },
-            {
-              label: 'Terapias Holísticas',
-              value: 'terapiasholisticas',
-              color: '#815dd6',
-            },
-            {
-              label: 'Budismo',
-              value: 'budismo',
-              color: '#d49c5c',
-            },
-            {
-              label: 'Yoga',
-              value: 'yoga',
-              color: '#b85cb3',
-            },
-            {
-              label: 'Xamanismo',
-              value: 'xamanismo',
-              color: '#533212',
-            },
-            {
-              label: 'Templos Espirituais',
-              value: 'templosespirituais',
-              color: '#627fcf',
-            },
-          ].sort((a, b) => (a.label > b.label ? 1 : -1))}
+          // @ts-ignore
+          sendValueHandler={(values) => updatePlacesByTag(values)}
+          // @ts-ignore
+          options={categoriesOptions.sort((a, b) =>
+            a.label > b.label ? 1 : -1
+          )}
         />
       </S.MapHeaderFilters>
     </S.MapHeaderWrapper>

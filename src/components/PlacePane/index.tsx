@@ -18,7 +18,7 @@ type PlacePaneProps = {
     aboutText: {
       html: FunctionStringCallback
     }
-    tags: { label: string; color: string }[]
+    categories: { name: string; value: string; color: { hex: string } }[]
     gallery: { url: string }[]
   }
   closePane: () => void
@@ -57,20 +57,18 @@ const PlacePane = ({ isVisible, data, closePane }: PlacePaneProps) => {
             >
               <S.PlacePaneTagList>
                 <span>ponto de luz</span>
-                {data.tags
-                  ? data.tags.map(
+                {data.categories
+                  ? data.categories.map(
+                      // @ts-ignore
                       (tag: { color: string; label: string }, index) => (
-                        <S.PlacePaneTag key={index} bgc={tag.color}>
-                          {tag.label}
+                        // @ts-ignore
+                        <S.PlacePaneTag key={index} bgc={tag.color.hex}>
+                          {/* @ts-ignore */}
+                          {tag.name}
                         </S.PlacePaneTag>
                       )
                     )
                   : null}
-                {/* <S.PlacePaneTag bgc="#533212">xamanismo</S.PlacePaneTag>
-                  <S.PlacePaneTag bgc="#ca5639">natureza</S.PlacePaneTag>
-                  <S.PlacePaneTag bgc="#815dd6">
-                    terapias holísticas
-                  </S.PlacePaneTag> */}
               </S.PlacePaneTagList>
 
               {/* Title */}
@@ -81,77 +79,7 @@ const PlacePane = ({ isVisible, data, closePane }: PlacePaneProps) => {
                   // @ts-ignore
                   __html: data.aboutText?.html || '',
                 }}
-              >
-                {/* <p></p>
-                  <h4>neste ponto você encontra:</h4>
-                  <ul>
-                    <li>• Contato com a natureza</li>
-                    <li>• Experiência multicultural</li>
-                    <li>• Artesanato local</li>
-                    <li>• Medicinas nativas</li>
-                    <li>• Oficinas e workshops</li>
-                  </ul>
-
-                  <h4>como entrar em contato:</h4>
-                  <ul>
-                    <li>
-                      • emal:{' '}
-                      <a
-                        target="_blank"
-                        href="mailto:contato@reservawanawa.com.br"
-                        rel="noreferrer"
-                      >
-                        contato@reservawanawa.com.br
-                      </a>{' '}
-                    </li>
-                    <li>
-                      • fones:
-                      <a
-                        target="_blank"
-                        href="phoneto:(33)99321-3233"
-                        rel="noreferrer"
-                      >
-                        (33) 99321-3233
-                      </a>
-                      <a
-                        target="_blank"
-                        href="phoneto:(33)99321-3233"
-                        rel="noreferrer"
-                      >
-                        (33) 3253-9422
-                      </a>
-                    </li>
-                  </ul>
-                  <ul>
-                    <li>
-                      • emal:{' '}
-                      <a
-                        target="_blank"
-                        href="mailto:contato@reservawanawa.com.br"
-                        rel="noreferrer"
-                      >
-                        contato@reservawanawa.com.br
-                      </a>{' '}
-                    </li>
-                    <li>
-                      • fones:
-                      <a
-                        target="_blank"
-                        href="phoneto:(33)99321-3233"
-                        rel="noreferrer"
-                      >
-                        (33) 99321-3233
-                      </a>
-                      <a
-                        target="_blank"
-                        href="phoneto:(33)99321-3233"
-                        rel="noreferrer"
-                      >
-                        (33) 3253-9422
-                      </a>
-                    </li>
-                  </ul> */}
-              </S.PlacePaneDescription>
+              ></S.PlacePaneDescription>
             </SimpleBar>
           </S.PlacePaneBody>
           {/* Footer */}

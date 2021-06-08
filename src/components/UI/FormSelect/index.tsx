@@ -14,6 +14,7 @@ type FormSelectProps = {
   style?: string
   Icon?: StyledIcon
   onChange?: () => void
+  sendValueHandler?: () => void
 }
 
 const animatedComponents = makeAnimated()
@@ -77,12 +78,15 @@ const FormSelect = ({
   options,
   onChange,
   Icon,
+  sendValueHandler,
 }: FormSelectProps) => {
   const [selectedValues, setSelectedValues] = useState()
 
   const handleChange = (values: ValuesProps) => {
     //@ts-ignore
     setSelectedValues(values)
+    //@ts-ignore
+    sendValueHandler(values.map((v) => v.value))
   }
 
   return (

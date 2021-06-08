@@ -5,12 +5,13 @@ import UserMenu from 'components/UserMenu'
 
 const Map = dynamic(() => import('components/Map'), { ssr: false })
 
-export default function Home({ places }: MapProps) {
+export default function Home({ places, tags }: MapProps) {
   return (
     <>
       <InfoLink position="bottom" href="/about" />
       <UserMenu />
-      <Map places={places} />
+      {/* @ts-ignore */}
+      <Map places={places} tags={tags} />
     </>
   )
 }

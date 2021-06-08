@@ -48,6 +48,16 @@ export const MapWrapper = styled.div`
     width: 50px !important;
     height: 50px !important;
     transition: all 0.3s, transform 0.1s;
+    animation: fadeIn 0.5s;
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
     &:hover {
       width: 59px !important;
@@ -118,7 +128,7 @@ export const MapWrapper = styled.div`
       .resume {
         font-weight: 400;
         font-size: 0.9rem;
-        color: rgba(0, 0, 0, 0.4);
+        color: rgba(0, 0, 0, 0.6);
         line-height: 1.2;
         margin-top: 4px;
         margin-bottom: 4px;
@@ -133,7 +143,7 @@ export const MapWrapper = styled.div`
       .span {
         font-size: 0.85rem;
         cursor: pointer;
-        color: rgba(0, 0, 0, 0.5);
+        color: rgba(0, 0, 0, 0.7);
 
         svg {
           width: 7px;
