@@ -145,13 +145,13 @@ const Map = ({ places, tags }: MapProps) => {
           // @ts-ignore
           lng: cordinates.longitude + offset.y,
         },
-        18,
+        14,
         {
           animated: true,
           duration: 2,
         }
       )
-      setMapZoom(18)
+      setMapZoom(14)
     }, delayToShow)
   }
 
@@ -175,9 +175,10 @@ const Map = ({ places, tags }: MapProps) => {
     // @ts-ignore
     if (map) map.flyTo(mapCenter, 3, { animated: true, duration: 1.5 })
     closePlace()
+    closePopupFix()
   }
 
-  const setMapPosition = (adress: AdressProps) => {
+  const setMapPosition = (adress: AdressProps, zoom = 17) => {
     closePlace()
     if (adress.geometry.bounds) {
       const bounds = adress.geometry.bounds
@@ -197,7 +198,7 @@ const Map = ({ places, tags }: MapProps) => {
           lat: adress.geometry.location.lat(),
           lng: adress.geometry.location.lng(),
         },
-        17,
+        zoom,
         { animated: true, duration: 1.5 }
       )
     }
@@ -236,7 +237,7 @@ const Map = ({ places, tags }: MapProps) => {
       />
 
       <S.MapWrapper
-        className={`${mapZoom > 10 ? 'upperMarkers' : ''} ${
+        className={`${mapZoom > 8 ? 'upperMarkers' : ''} ${
           isPlacePaneOpen ? 'isPlacePaneOpen' : ''
         }`}
       >
@@ -317,7 +318,7 @@ const Map = ({ places, tags }: MapProps) => {
                   }}
                   aria-label={name}
                 >
-                  {/* @ts-ignore */}
+                  {/* Show only if not selected and not mobile */}
                   {currentSlug !== slug && window.innerWidth > 768 ? (
                     <Tooltip offset={[14, -29]}>
                       <img alt={name} src={gallery[0].url}></img>

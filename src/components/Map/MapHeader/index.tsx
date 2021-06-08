@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { FormInputSearch, FormSelect, FormGoogleMaps } from 'components/UI/'
 import { Map } from '@styled-icons/entypo'
+import LocationButton from './LocationButton'
 import { Sparkles as SparklesIcon } from '@styled-icons/ionicons-outline'
 import { FilterAlt as FilterIcon } from '@styled-icons/boxicons-regular'
 import { Times as TimesIcon } from '@styled-icons/fa-solid'
@@ -40,6 +41,8 @@ const MapHeader = ({
       >
         <S.MapHeaderBrand src={'/img/brand.png'} />
       </S.MapHeaderBrandWrapper>
+
+      <LocationButton setMapPosition={setMapPosition} />
 
       <S.MapHeaderFilters isActive={isActive}>
         <S.MapHeaderFilterToggler

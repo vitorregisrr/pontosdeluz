@@ -27,7 +27,7 @@ export const MapWrapper = styled.div`
   }
 
   .leaflet-tile-pane {
-    opacity: 0.6;
+    opacity: 0.5;
   }
 
   .leaflet-marker-pane {

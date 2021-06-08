@@ -91,6 +91,7 @@ export const MapHeaderFilters = styled.form`
 
     @media screen and (min-width: 768px) {
       margin-right: 15px;
+      margin-bottom: 0;
     }
 
     @media screen and (min-width: 1100px) {
