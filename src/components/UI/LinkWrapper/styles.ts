@@ -7,7 +7,7 @@ type WrapperProps = {
 export const Wrapper = styled.div`
   position: fixed;
   z-index: 1400; // bigger than leaflet
-  right: calc(var(--medium) - 10px);
+  right: calc(var(--medium) - 18px);
   color: var(--white);
   cursor: pointer;
   opacity: 0.9;
@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
 
   ${(props: WrapperProps) => {
     if (props.position === 'top') {
-      return `top: calc(var(--medium) - 10px);`
+      return `top: calc(var(--medium) - 15px);`
     } else if (props.position === 'bottom') {
       return `bottom: calc(var(--medium) - 10px);`
     }

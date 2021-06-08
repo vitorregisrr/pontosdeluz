@@ -2,17 +2,25 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   position: relative;
-  padding-top: 4rem;
+  padding-top: 2rem;
   height: 100vh;
   background-color: #fff;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 4rem;
+  }
 
   .simplebar-offset {
     width: 100%;
   }
 
   .simplebar-track.simplebar-vertical {
-    right: 4vw;
+    right: 1vw;
     opacity: 0.6;
+
+    @media screen and (min-width: 768px) {
+      right: 5vw;
+    }
 
     &::before {
       width: 4px;
@@ -43,6 +51,7 @@ export const Wrapper = styled.div`
 
 export const Container = styled.section`
   max-width: var(--container);
+  padding: 0 20px;
   margin: auto;
 `
 
