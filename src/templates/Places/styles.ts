@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   position: relative;
-  padding-top: 2rem;
+  overflow: hidden;
+  padding-top: 3rem;
   height: 100vh;
   background-color: #fff;
 
@@ -50,15 +51,18 @@ export const Wrapper = styled.div`
 `
 
 export const Container = styled.section`
+  width: 100vw;
   max-width: var(--container);
   padding: 0 20px;
   margin: auto;
+  overflow: hidden;
 `
 
 export const TagList = styled.ul`
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
+  margin-bottom: 1rem;
 
   span {
     font-size: 1.2rem;
@@ -89,10 +93,15 @@ export const Tag = styled.li`
 `
 
 export const Heading = styled.h1`
-  font-size: 4.5rem;
+  font-size: 4.2rem;
+  line-height: 1.2;
   margin-bottom: 1.5rem;
   max-width: 80rem;
   color: #020726;
+
+  @media screen and (min-width: 768px) {
+    font-size: 4.5rem;
+  }
 `
 
 export const Body = styled.div`
@@ -119,10 +128,11 @@ export const Body = styled.div`
   }
 
   ul {
-    list-style: none;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
+    flex-wrap: wrap;
+    list-style: none;
 
     li {
       font-size: 1.7rem;
