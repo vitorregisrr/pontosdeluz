@@ -130,7 +130,7 @@ export const PlacePaneTag = styled.li`
 
 export const PlacePaneTitle = styled.h2`
   font-size: 2em;
-  margin: 2px 0 2px 0;
+  margin: 7px 0 2px 0;
   color: rgba(0, 0, 0, 1);
 `
 

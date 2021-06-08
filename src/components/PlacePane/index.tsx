@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import SimpleBar from 'simplebar-react'
 import { CSSTransition } from 'react-transition-group'
+
+import ShareDropdown from '../ShareDropdown'
 
 import { Share as ShareIcon } from '@styled-icons/remix-line'
 import { ReadMore as ReadMoreIcon } from '@styled-icons/material-rounded'
@@ -28,6 +31,7 @@ const PlacePane = ({ isVisible, data, closePane }: PlacePaneProps) => {
   const onCloseButtonClick = () => {
     closePane()
   }
+  const [isShareActive, setIsShareActive] = useState(false)
 
   return (
     <>
@@ -83,10 +87,16 @@ const PlacePane = ({ isVisible, data, closePane }: PlacePaneProps) => {
           {/* Footer */}
           <S.PlacePaneFooter>
             <S.PlacePaneShareWrapper>
-              <S.PlacePaneShareButton>
+              <S.PlacePaneShareButton
+                onClick={() => setIsShareActive((old) => !old)}
+              >
                 <ShareIcon />
                 <span className="label">Compartilhar</span>
               </S.PlacePaneShareButton>
+              <ShareDropdown
+                isActive={isShareActive}
+                url={`https://pontosdeluz.vercel.app/place/${data.slug}`}
+              />
               <S.PlacePaneShareMenu></S.PlacePaneShareMenu>
             </S.PlacePaneShareWrapper>
             <S.PlacePaneMoreLinkWrapper>
