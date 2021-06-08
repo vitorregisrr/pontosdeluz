@@ -236,7 +236,7 @@ const Map = ({ places, tags }: MapProps) => {
       />
 
       <S.MapWrapper
-        className={`${mapZoom > 14 ? 'upperMarkers' : ''} ${
+        className={`${mapZoom > 10 ? 'upperMarkers' : ''} ${
           isPlacePaneOpen ? 'isPlacePaneOpen' : ''
         }`}
       >
