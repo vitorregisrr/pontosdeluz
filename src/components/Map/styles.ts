@@ -155,6 +155,12 @@ export const MapWrapper = styled.div`
   }
 
   .leaflet-tooltip-pane {
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+    }
+
     .leaflet-tooltip {
       position: relative;
       white-space: pre-wrap;
