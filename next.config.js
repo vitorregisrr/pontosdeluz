@@ -7,7 +7,7 @@ module.exports = withPWA({
     disable: !isProd,
   },
   images: {
-    domains: ['media.graphcms.com'],
+    domains: ['*'],
   },
 })
 

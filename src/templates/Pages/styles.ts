@@ -29,17 +29,27 @@ export const Content = styled.section`
 `
 
 export const Heading = styled.h1`
-  font-size: var(--large);
+  font-size: 4rem;
   margin-bottom: 1.9rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 6.4rem;
+  }
 `
 
 export const Body = styled.div`
   // serve para estilos do body
   // p, a, ul, li, blockquote
   p {
-    font-size: 1.9rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     font-weight: 400;
+    padding: 0 20px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 1.9rem;
+      padding: 0;
+    }
   }
 
   h4 {

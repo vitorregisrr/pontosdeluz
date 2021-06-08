@@ -1,10 +1,11 @@
-import Image from 'next/image'
-
+import SimpleBar from 'simplebar-react'
 import LinkWrapper from 'components/UI/LinkWrapper'
 import { CloseOutline } from '@styled-icons/evaicons-outline/CloseOutline'
-
-import * as S from './styles'
+import DisqusBox from 'components/DisqusBox'
 import { useRouter } from 'next/dist/client/router'
+
+// @ts-ignore
+import * as S from './styles.ts'
 
 type ImageProps = {
   url: string
@@ -14,11 +15,13 @@ type ImageProps = {
 
 export type PlacesTemplateProps = {
   place: {
-    slug: string
+    id: string
     name: string
+    slug: string
     aboutText: {
-      html: string
+      html: FunctionStringCallback
     }
+    categories: { name: string; value: string; color: { hex: string } }[]
     gallery: ImageProps[]
   }
 }
@@ -31,29 +34,54 @@ export default function PlacesTemplate({ place }: PlacesTemplateProps) {
   return (
     <>
       <LinkWrapper href="/">
-        <CloseOutline size={32} aria-label="Go back to map" />
+        <span style={{ color: '#020726' }}>
+          <CloseOutline size={32} aria-label="Go back to map" />
+        </span>
       </LinkWrapper>
 
       <S.Wrapper>
         <S.Container>
-          <S.Heading>{place.name}</S.Heading>
+          <SimpleBar
+            autoHide={false}
+            style={{
+              height: '100%',
+              width: '100%',
+            }}
+          >
+            <S.TagList>
+              <span>ponto de luz</span>
+              {place.categories
+                ? place.categories.map(
+                    // @ts-ignore
+                    (tag: { color: string; label: string }, index) => (
+                      // @ts-ignore
+                      <S.Tag key={index} bgc={tag.color.hex}>
+                        {/* @ts-ignore */}
+                        {tag.name}
+                      </S.Tag>
+                    )
+                  )
+                : null}
+            </S.TagList>
+            <S.Heading>{place.name}</S.Heading>
 
-          <S.Body
-            dangerouslySetInnerHTML={{ __html: place.aboutText?.html || '' }}
-          />
+            <S.Body
+              // @ts-ignore
+              dangerouslySetInnerHTML={{ __html: place.aboutText?.html || '' }}
+            />
 
-          <S.Gallery>
-            {place.gallery.map((image, index) => (
-              <Image
-                key={`photo-${index}`}
-                src={image.url}
-                alt={place.name}
-                width={1000}
-                height={600}
-                quality={75}
-              />
-            ))}
-          </S.Gallery>
+            <S.Gallery>
+              {place.gallery.map((image, index) => (
+                <img key={`photo-${index}`} src={image.url} alt={place.name} />
+              ))}
+            </S.Gallery>
+
+            <DisqusBox
+              category={``}
+              url={`/place/${place.slug}`}
+              title={place.name}
+            ></DisqusBox>
+          </SimpleBar>
         </S.Container>
       </S.Wrapper>
     </>

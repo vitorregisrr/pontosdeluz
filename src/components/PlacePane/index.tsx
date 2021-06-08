@@ -91,9 +91,9 @@ const PlacePane = ({ isVisible, data, closePane }: PlacePaneProps) => {
             </S.PlacePaneShareWrapper>
             <S.PlacePaneMoreLinkWrapper>
               <Link href={`/place/${data.slug}`}>
-                <>
+                <span>
                   Acessar página completa <ReadMoreIcon />
-                </>
+                </span>
               </Link>
             </S.PlacePaneMoreLinkWrapper>
           </S.PlacePaneFooter>

@@ -1881,8 +1881,8 @@ export type Place = Node & {
   publishedBy?: Maybe<User>;
   name: Scalars['String'];
   slug: Scalars['String'];
-  cordinates?: Maybe<Location>;
-  resume?: Maybe<Scalars['String']>;
+  cordinates: Location;
+  resume: Scalars['String'];
   aboutText?: Maybe<RichText>;
   gallery: Array<Asset>;
   visible: Scalars['Boolean'];
@@ -2045,10 +2045,10 @@ export type PlaceCreateInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   slug: Scalars['String'];
-  cordinates?: Maybe<LocationInput>;
-  resume?: Maybe<Scalars['String']>;
+  cordinates: LocationInput;
+  resume: Scalars['String'];
   aboutText?: Maybe<Scalars['RichTextAST']>;
-  gallery?: Maybe<AssetCreateManyInlineInput>;
+  gallery: AssetCreateManyInlineInput;
   visible: Scalars['Boolean'];
   visited: Scalars['Boolean'];
   categories?: Maybe<PlaceCategoriesCreateManyInlineInput>;
@@ -3695,10 +3695,10 @@ export type GetPlacesQuery = (
         { __typename?: 'Color' }
         & Pick<Color, 'hex'>
       ) }
-    )>, cordinates?: Maybe<(
+    )>, cordinates: (
       { __typename?: 'Location' }
       & Pick<Location, 'longitude' | 'latitude'>
-    )>, aboutText?: Maybe<(
+    ), aboutText?: Maybe<(
       { __typename?: 'RichText' }
       & Pick<RichText, 'html' | 'text'>
     )>, gallery: Array<(
@@ -3732,10 +3732,10 @@ export type GetPlaceBySlugQuery = (
         { __typename?: 'Color' }
         & Pick<Color, 'hex'>
       ) }
-    )>, cordinates?: Maybe<(
+    )>, cordinates: (
       { __typename?: 'Location' }
       & Pick<Location, 'longitude' | 'latitude'>
-    )>, aboutText?: Maybe<(
+    ), aboutText?: Maybe<(
       { __typename?: 'RichText' }
       & Pick<RichText, 'html' | 'text'>
     )>, gallery: Array<(
