@@ -24,27 +24,23 @@ const AddMenu = ({ isActive = false, toggleActive }: AddMenuProps) => {
         <S.AddMenuDropdown isActive={isActive}>
           <S.AddMenuDropdownList>
             <S.AddMenuDropdownItem>
-              <a
-                href="https://app.graphcms.com/582d048eddf8400783e74e6f8df6097e/master/schema/model/Place"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <>
+              <Link href="/em-desenvolvimento">
+                <label className="wrapper">
                   {' '}
                   <SparklesIcon className="sub-icon" />
                   <PlusIcon className="plus-icon" />
                   <span>Submeter um ponto para este mapa</span>
-                </>
-              </a>
+                </label>
+              </Link>
             </S.AddMenuDropdownItem>
             <S.AddMenuDropdownItem>
-              <Link href="/">
-                <>
+              <Link href="/em-desenvolvimento">
+                <label className="wrapper">
                   {' '}
                   <MapIcon className="sub-icon" />
                   <PlusIcon className="plus-icon" />
                   <span>Criar meu próprio mapa</span>
-                </>
+                </label>
               </Link>
             </S.AddMenuDropdownItem>
           </S.AddMenuDropdownList>

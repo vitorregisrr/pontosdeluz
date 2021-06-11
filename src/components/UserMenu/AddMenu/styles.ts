@@ -114,13 +114,17 @@ export const AddMenuDropdownList = styled.ul`
 
 export const AddMenuDropdownItem = styled.li`
   position: relative;
-  display: flex;
-  align-items: center;
   font-size: 1.25rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
   padding: 10px 14px;
   transition: all 0.4s;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
 
   &:hover {
     background-color: var(--highlight);

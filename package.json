@@ -22,6 +22,7 @@
     ]
   },
   "dependencies": {
+    "@styled-icons/bootstrap": "^10.34.0",
     "@styled-icons/boxicons-regular": "^10.34.0",
     "@styled-icons/boxicons-solid": "^10.34.0",
     "@styled-icons/entypo": "^10.18.0",

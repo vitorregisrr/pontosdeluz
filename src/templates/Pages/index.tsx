@@ -10,15 +10,20 @@ export type PageTemplateProps = {
 
 const PageTemplate = ({ heading, body }: PageTemplateProps) => (
   <S.Content>
-    <LinkWrapper href="/">
-      <CloseOutline size={32} />
-    </LinkWrapper>
+    <S.Container>
+      <LinkWrapper href="/">
+        <span style={{ color: 'black' }}>
+          {' '}
+          <CloseOutline size={32} />
+        </span>
+      </LinkWrapper>
 
-    <S.Heading>{heading}</S.Heading>
+      <S.Heading>{heading}</S.Heading>
 
-    <S.Body>
-      <div dangerouslySetInnerHTML={{ __html: body.html }} />
-    </S.Body>
+      <S.Body>
+        <div dangerouslySetInnerHTML={{ __html: body.html }} />
+      </S.Body>
+    </S.Container>
   </S.Content>
 )
 

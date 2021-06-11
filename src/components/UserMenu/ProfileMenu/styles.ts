@@ -11,10 +11,12 @@ type ProfileButtonProps = {
 }
 
 export const ProfileButton = styled.button`
+  position: relative;
   width: 49px;
   height: 49px;
   background: none;
   border: 3.4px solid #fff;
+  background-color: #fff;
   border-radius: 50%;
   opacity: 0.9;
   overflow: hidden;
@@ -43,10 +45,15 @@ export const ProfileButton = styled.button`
 `
 
 export const ImageIcon = styled.img`
-  width: 104%;
-  height: 104%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 102%;
+  height: 102%;
   object-fit: cover;
   object-position: center center;
+  transform: scale(1.02) translate(-50%, -50%);
 `
 
 type ProfileDropdownProps = {
@@ -103,13 +110,17 @@ export const ProfileDropdownList = styled.ul`
 
 export const ProfileDropdownItem = styled.li`
   position: relative;
-  display: flex;
-  align-items: center;
   font-size: 1.24rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
   padding: 10px 14px;
   transition: all 0.4s;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
 
   &:hover {
     background-color: var(--highlight);

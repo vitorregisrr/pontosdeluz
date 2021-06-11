@@ -152,6 +152,7 @@ export const NotifyDropdownList = styled.div`
   position: relative;
   width: 100%;
   height: 60vh;
+  list-style: none;
   border-radius: 15px;
   padding: 0;
   overflow: hidden;
@@ -172,14 +173,18 @@ export const NotifyDropdownList = styled.div`
 
 export const NotifyDropdownItem = styled.li`
   position: relative;
-  display: flex;
   width: 100%;
-  align-items: center;
   font-size: 1.2rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
   padding: 10px 14px;
   transition: all 0.4s;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
 
   &:hover {
     background-color: var(--highlight);
