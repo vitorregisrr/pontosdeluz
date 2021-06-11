@@ -33,7 +33,7 @@ const NotifyMenu = ({ isActive = false, toggleActive }: NotifyMenuProps) => {
             >
               <S.NotifyDropdownItem>
                 <Link href="/em-desenvolvimento">
-                  <label className="wrapper">
+                  <div className="wrapper">
                     <div className="icon-wrapper">
                       <MapIcon />
                     </div>
@@ -45,13 +45,13 @@ const NotifyMenu = ({ isActive = false, toggleActive }: NotifyMenuProps) => {
                    Mongi das Cruzes" no seu mapa Ponto de Luz, você poderia avaliar
                   esta submissão?`}</p>
                     </div>
-                  </label>
+                  </div>
                 </Link>
               </S.NotifyDropdownItem>
 
               <S.NotifyDropdownItem>
                 <Link href="/em-desenvolvimento">
-                  <label className="wrapper">
+                  <div className="wrapper">
                     <div className="icon-wrapper">
                       <MapIcon />
                     </div>
@@ -62,13 +62,13 @@ const NotifyMenu = ({ isActive = false, toggleActive }: NotifyMenuProps) => {
                       <p className="desc">{`Seu mapa tá bombando ein? Que tal dar uma analisada nas estatísticas das suas
                   visitas e revisar algumas submissões de pontos? `}</p>
                     </div>
-                  </label>
+                  </div>
                 </Link>
               </S.NotifyDropdownItem>
 
               <S.NotifyDropdownItem>
                 <Link href="/em-desenvolvimento">
-                  <label className="wrapper">
+                  <div className="wrapper">
                     <div className="icon-wrapper">
                       <SparklesIcon />
                     </div>
@@ -79,7 +79,7 @@ const NotifyMenu = ({ isActive = false, toggleActive }: NotifyMenuProps) => {
                       <p className="desc">{`Parece que sua submissão acaba de ser aprovada pelo admnistrador Vitor Régis (@vitorregisr), 
                   que tal visitar o mapa para ver este ponto e enviar uma mensagem de agradecimento para ele?`}</p>
                     </div>
-                  </label>
+                  </div>
                 </Link>
               </S.NotifyDropdownItem>
             </SimpleBar>

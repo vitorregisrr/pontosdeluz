@@ -25,22 +25,22 @@ const AddMenu = ({ isActive = false, toggleActive }: AddMenuProps) => {
           <S.AddMenuDropdownList>
             <S.AddMenuDropdownItem>
               <Link href="/em-desenvolvimento">
-                <label className="wrapper">
+                <div className="wrapper">
                   {' '}
                   <SparklesIcon className="sub-icon" />
                   <PlusIcon className="plus-icon" />
                   <span>Submeter um ponto para este mapa</span>
-                </label>
+                </div>
               </Link>
             </S.AddMenuDropdownItem>
             <S.AddMenuDropdownItem>
               <Link href="/em-desenvolvimento">
-                <label className="wrapper">
+                <div className="wrapper">
                   {' '}
                   <MapIcon className="sub-icon" />
                   <PlusIcon className="plus-icon" />
                   <span>Criar meu próprio mapa</span>
-                </label>
+                </div>
               </Link>
             </S.AddMenuDropdownItem>
           </S.AddMenuDropdownList>

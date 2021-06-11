@@ -81,9 +81,9 @@ const ProfileMenu = ({ isActive = false, toggleActive }: ProfileMenuProps) => {
               return (
                 <S.ProfileDropdownItem key={href}>
                   <Link href={href}>
-                    <label className="wrapper">
+                    <div className="wrapper">
                       <Ico /> <span>{label}</span>
-                    </label>
+                    </div>
                   </Link>
                 </S.ProfileDropdownItem>
               )
