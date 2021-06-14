@@ -10,8 +10,7 @@ export default function Home({ places, tags }: MapProps) {
     <>
       <InfoLink position="bottom" href="/about" />
       <UserMenu />
-      {/* @ts-ignore */}
-      <Map places={places} tags={tags} />
+      <Map places={places || []} tags={tags || []} />
     </>
   )
 }

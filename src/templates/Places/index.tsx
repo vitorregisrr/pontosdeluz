@@ -55,7 +55,6 @@ export default function PlacesTemplate({ place }: PlacesTemplateProps) {
       </LinkWrapper>
       <S.Wrapper>
         <SimpleBar
-          // @ts-ignore
           autoHide={false}
           style={{
             height: '100%',
@@ -66,16 +65,11 @@ export default function PlacesTemplate({ place }: PlacesTemplateProps) {
             <S.TagList>
               <span>ponto de luz</span>
               {place.categories
-                ? place.categories.map(
-                    // @ts-ignore
-                    (tag: { color: string; label: string }, index) => (
-                      // @ts-ignore
-                      <S.Tag key={index} bgc={tag.color.hex}>
-                        {/* @ts-ignore */}
-                        {tag.name}
-                      </S.Tag>
-                    )
-                  )
+                ? place.categories.map((tag, index) => (
+                    <S.Tag key={index} bgc={tag.color.hex}>
+                      {tag.name}
+                    </S.Tag>
+                  ))
                 : null}
             </S.TagList>
             <S.Heading>
@@ -91,7 +85,6 @@ export default function PlacesTemplate({ place }: PlacesTemplateProps) {
               </S.ShareWrapper>
             </S.Heading>
             <S.Body
-              // @ts-ignore
               dangerouslySetInnerHTML={{ __html: place.aboutText?.html || '' }}
             />
           </S.Container>

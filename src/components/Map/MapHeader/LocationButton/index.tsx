@@ -3,7 +3,12 @@ import { GpsFixed as GpsButton } from '@styled-icons/material'
 import * as S from './styles'
 
 type LocationButton = {
-  setMapPosition: () => void
+  setMapPosition: (
+    geometry: {
+      geometry: { location: { lat: () => number; lng: () => number } }
+    },
+    zoom: number
+  ) => void
 }
 
 const LocationButton = ({ setMapPosition }: LocationButton) => {
@@ -11,7 +16,6 @@ const LocationButton = ({ setMapPosition }: LocationButton) => {
     if (navigator.geolocation) {
       return navigator.geolocation.getCurrentPosition((position) => {
         setMapPosition(
-          // @ts-ignore
           {
             geometry: {
               location: {

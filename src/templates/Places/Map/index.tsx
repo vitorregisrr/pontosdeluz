@@ -49,7 +49,6 @@ const PlacesTemplate = ({ place }: PlacesTemplateProps) => {
   return (
     <S.MapWrapper>
       <MapContainer
-        // @ts-ignore
         center={[
           place.cordinates.latitude + offsetY,
           place.cordinates.longitude,
@@ -62,10 +61,9 @@ const PlacesTemplate = ({ place }: PlacesTemplateProps) => {
           [-80, 220],
           [180, -180],
         ]}
-        // @ts-ignore
+        // @ts-ignore (fix extra lib)
         loadingControl={true}
         scrollWheelZoom={true}
-        // @ts-ignore
         style={{ height: '100%', width: '100%' }}
       >
         <CustomTileLayer />

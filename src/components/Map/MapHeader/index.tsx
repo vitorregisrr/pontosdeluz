@@ -25,7 +25,7 @@ const MapHeader = ({
   categoriesOptions,
   updatePlacesByTag,
 }: MapHeaderProps) => {
-  // Mobile visibility
+  // State -> mobile visibility
   const [isActive, setIsActive] = useState(false)
 
   const onToggleButtonClickHandler = () => {
@@ -52,24 +52,21 @@ const MapHeader = ({
         >
           {isActive ? <TimesIcon className="times-icon" /> : <FilterIcon />}
         </S.MapHeaderFilterToggler>
+
         <FormInputSearch
           Icon={SparklesIcon}
-          /* @ts-ignore */
-          sendValueHandler={(slug: string) => openPlace(slug)}
+          sendValueHandler={openPlace}
           options={placesOptions}
           placeholder="Pesquisar um ponto pelo nome..."
         />
         <FormGoogleMaps
-          // @ts-ignore
-          onChange={(adress) => setMapPosition(adress)}
+          onChange={setMapPosition}
           Icon={Map}
           placeholder="Pesquisar um país, cidade, rua..."
         />
         <FormSelect
           placeholder="Filtrar por categorias..."
-          // @ts-ignore
-          sendValueHandler={(values) => updatePlacesByTag(values)}
-          // @ts-ignore
+          sendValueHandler={updatePlacesByTag}
           options={categoriesOptions.sort((a, b) =>
             a.label > b.label ? 1 : -1
           )}

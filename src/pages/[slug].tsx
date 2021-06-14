@@ -8,7 +8,7 @@ import { GetPageBySlugQuery, GetPagesQuery } from 'graphql/generated/graphql'
 export default function Page({ heading, body }: PageTemplateProps) {
   const router = useRouter()
 
-  // retorna um loading, qq coisa enquanto tá sendo criado
+  // retorna um loading ou qq coisa enquanto tá sendo criado
   if (router.isFallback) return null
 
   return <PageTemplate heading={heading} body={body} />

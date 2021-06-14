@@ -88,28 +88,23 @@ const Map = ({ places, tags }: MapProps) => {
   }
 
   const [map, setMap] = useState()
-  // @ts-ignore
   const [mapCenter, setMapCenter] = useState([-15, -45])
   const [mapZoom, setMapZoom] = useState(3)
-  const markersRefs = useRef([])
-  // @ts-ignore
+
   const [iconMarker, setIconMarker] = useState(
-    // @ts-ignore
+    // @ts-ignore -> fix divIcon descontruring types bug
     L.divIcon({
       ...baseIcon,
     })
   )
   const [currPlaces, setCurrPlaces] = useState(places || [])
-  const [currFilters, setCurrFilters] = useState({
-    tags: [],
-  })
 
   const [isPlacePaneOpen, setIsPlacePaneOpen] = useState(false)
-  const [currentSlug, setCurrentSlug] = useState(null)
+  const [currentSlug, setCurrentSlug] = useState('')
 
   const closePlace = () => {
     setIsPlacePaneOpen(false)
-    setTimeout(() => setCurrentSlug(null), 300)
+    setTimeout(() => setCurrentSlug(''), 300)
 
     if (window.innerWidth > 768) {
       closePopupFix()
@@ -132,18 +127,15 @@ const Map = ({ places, tags }: MapProps) => {
       }
 
       if (shouldOpenPane) {
-        // @ts-ignore
         setCurrentSlug(slug)
         setIsPlacePaneOpen(true)
       }
 
-      // @ts-ignore
+      // @ts-ignore -> fix map non typefication
       map.flyTo(
         {
-          // @ts-ignore
-          lat: cordinates.latitude + offset.x,
-          // @ts-ignore
-          lng: cordinates.longitude + offset.y,
+          lat: cordinates!.latitude + offset.x,
+          lng: cordinates!.longitude + offset.y,
         },
         14,
         {
@@ -172,8 +164,8 @@ const Map = ({ places, tags }: MapProps) => {
   }
 
   const zoomOut = () => {
-    // @ts-ignore
-    if (map) map.flyTo(mapCenter, 3, { animated: true, duration: 1.5 })
+    // @ts-ignore -> fix map non typefication
+    map.flyTo(mapCenter, 3, { animated: true, duration: 1.5 })
     closePlace()
     closePopupFix()
   }
@@ -182,17 +174,14 @@ const Map = ({ places, tags }: MapProps) => {
     closePlace()
     if (adress.geometry.bounds) {
       const bounds = adress.geometry.bounds
-      // @ts-ignore
-      const parsedBounds = Object.values(bounds)
-      // @ts-ignore
+      const parsedBounds: { g: string; i: string }[] = Object.values(bounds)
+      // @ts-ignore -> fix map non typefication
       map.flyToBounds([
-        // @ts-ignore
         [parsedBounds[0].g, parsedBounds[1].g],
-        // @ts-ignore
         [parsedBounds[0].i, parsedBounds[1].i],
       ])
     } else if (adress.geometry.location) {
-      // @ts-ignore
+      // @ts-ignore -> fix map non typefication
       map.flyTo(
         {
           lat: adress.geometry.location.lat(),
@@ -207,17 +196,14 @@ const Map = ({ places, tags }: MapProps) => {
   const updatePlacesByTag = (tags: string[]) => {
     if (tags.length > 0) {
       const newCurrPlaces = places?.filter((place) => {
-        // valores das tags contidas no item atual
-        // @ts-ignore
+        // get current item tag values
         const placeTagsValues = place.categories.map((tag) => tag.value)
-        // @ts-ignore
         return placeTagsValues.some((r) => tags.includes(r))
       })
       closePlace()
       setCurrPlaces(newCurrPlaces || [])
     } else {
-      // @ts-ignore
-      setCurrPlaces(places)
+      setCurrPlaces(places || [])
     }
   }
 
